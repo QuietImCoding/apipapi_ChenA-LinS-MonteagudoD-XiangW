@@ -2,8 +2,12 @@ danielM -- 2016-12-05 20:28
 - Updated design log to reflect our moving away from the Clarifai API
 - Added a simple python file to help demo how the two API's work
 
-sharonL --- something
-- something
+sharonL --- 2016-12-06 06:15
+- added additional core folders (static, templates, utils, data)
+- created flask app for simple login/register and dashboard
 
 williamX --- 2016-12-06 13:13
 - added core folders, bootstrap src, and makefile
+
+sharonL --- 2016-12-06 12:38
+- moved db into data folder
