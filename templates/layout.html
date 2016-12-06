@@ -1,11 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <script type="text/javascript" src="/static/js/boostrap.min.js"></script>
     {% block head %}
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}No Title{% endblock %}</title>
     {% endblock %}
   </head>
+
   <body>
-    {% block content %}{% endblock %}
+    <!-- navbar -->
+    {% block content %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+	
+      </div>
+    </nav>
+    {% endblock %}
   </body>
 </html>
