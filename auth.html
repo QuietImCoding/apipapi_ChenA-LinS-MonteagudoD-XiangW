@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+    {% if action_type == "login" %}
+
+    <head>
+      <title>LOGIN</title>
+    </head>
+    
+    <body>
+    
+<h1><center>This is the Memer Login Page</center></h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <center>
+    <table border="1">
+      <tr>
+	<td>
+	  <form action="/login", method="POST">
+	    <center>Username<br></center>
+	        <input type="text" name="username">
+		  <br>
+		    <br>
+		      <center>Password<br></center>
+		      <input type="password" name="password">
+		        <br>
+			  <br>
+			    <input type="submit" name="sub1">
+			      
+			    </form>
+	  </td>
+      </tr>
+    </table>
+    </center>
+
+    <br>
+    <br>
+    <br>
+    <center>
+    <form action="/make_account">
+      <input type="submit" value="Make Account" />
+    </form>
+    </center>
+
+    {% elif action_type == "mk_act"%}
+
+    <head>
+      <title>MAKE ACOUNT</title>
+    </head>
+    
+    <body>
+    
+    WELCOME TO THE MAKE ACCOUNT PAGE
+    <br>
+    <br>
+    To Make an Account:
+    <br>
+    <br>
+    
+    <table border="1">
+      <tr>
+	<td>
+	  <form action="/create_account", method="POST">
+	      username:<br>
+	        <input type="text" name="username">
+		  <br>
+		    <br>
+		      email:<br>
+		      <input type="text" name="email">
+		        <br>
+			  <br>
+			    password:<br>
+			    <input type="password" name="password1">
+			      <br>
+			        <br>
+				  re-enter password:<br>
+				  <input type="password" name="password2">
+				    <br>
+				      <br>
+				        <input type="submit" name="sub1">
+					  
+					</form>
+	  </td>
+      </tr>
+    </table>
+
+    <br>
+    <form action="/">
+      <input type="submit" value="BACK" />
+    </form>
+    
+    {% endif %}
+    
+  </body>
+  
+</html>
