@@ -33,7 +33,7 @@ def randomImages():
     for photo in photos:
         urls.append("https://farm%s.staticflickr.com/%s/%s_%s.jpg" % (photo[0], photo[1], photo[2], photo[3]))
 
-    page = ""
+    page = "<h1>%s</h1><h3>%s</h3>" % (word, example)
     for photo in urls:
         page += "<img src='%s'/>" % photo
 
