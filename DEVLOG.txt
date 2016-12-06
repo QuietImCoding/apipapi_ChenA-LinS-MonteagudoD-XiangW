@@ -1,0 +1,3 @@
+danielM -- 2016-12-5 20:28
+- Updated design log to reflect our moving away from the Clarifai API
+- Added a simple python file to help demo how the two API's work
