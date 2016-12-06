@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route("/")
 def randomImages():
     
-    global word, example
+    global word, example, definition
     
     response = findImage()
     
@@ -19,17 +19,22 @@ def randomImages():
     for photo in photos:
         urls.append("https://farm%s.staticflickr.com/%s/%s_%s.jpg" % (photo[0], photo[1], photo[2], photo[3]))
 
-    page = "<head><title>%s</title></head><h1>%s</h1><h3>%s</h3>" % (word, word, example)
+    page = "<head><title>%s</title></head><h1>%s</h1><h2>%s</h2><h3>%s</h3>" % (word, word, definition, example)
     for photo in urls:
         page += "<img src='%s'/>" % photo
 
     return page
 
 def findImage():
-    global word, example
-    headers = {'Content-type':'application/json', 'api_key':'40dc55834c419934220050a79fd0655dbb1f88083bc729ad9'}
+    global word, example, definition 
+    headers = {'Content-type':'application/json', 'api_key':'40dc55834c419934220050a79fd0655dbb1f88083bc729ad9', 'sourceDictionaries' : 'webster'}
     response = requests.get("http://api.wordnik.com/api/words.json/randomWord", headers)
     word = response.json()['word']
+    response = requests.get("http://api.wordnik.com/api/word.json/" + word + "/definitions", headers)
+    try:
+        definition = response.json()[0]['text']
+    except Exception:
+        findImage()
     response = requests.get("http://api.wordnik.com/api/word.json/" + word + "/topExample", headers)
     try:
         example = response.json()['text']
