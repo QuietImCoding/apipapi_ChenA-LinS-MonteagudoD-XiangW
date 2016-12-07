@@ -43,6 +43,42 @@ def log_em_out():
     session.pop(secret)
     return redirect(url_for("index")) #redirect(url_for("log_em_in"))
 
+@app.route("/make_meme")
+def make_a_meme():
+    if(secret in session):
+        #do the making meme thing here - I assume it's 
+        #randomly generated from Daniel's code???
+        #Ideally this also allows you to click this 
+        #as many time to generate new memes each time
+        #It's basically the random meme generator
+        return render_template("meme.html", action="make")
+    return render_template('auth.html', action_type='login')
+
+@app.route("/save_meme")
+def save_meme():
+    if(secret in session):
+        #do the saving meme thing here
+        #to save the meme and associate it with a user
+        return render_template("index.html")
+    return render_template('auth.html', action_type='login')
+
+@app.route("/display_memes")
+def display_memes():
+    if(secret in session):
+        #this is to display all of the memes in the gallery
+        # I will make separate functions for main and 
+        #user specific galleries
+        return render_template("gallery.html")
+    return render_template('auth.html', action_type='login')
+
+@app.route("/home")
+def return_home():
+    if(secret in session):
+        #this is to display all of the memes in the gallery
+        return render_template("index.html")
+    return render_template('auth.html', action_type='login')
+
+
 @app.route("/make_account")
 def make_dat_account():
     return render_template('auth.html', action_type="mk_act")

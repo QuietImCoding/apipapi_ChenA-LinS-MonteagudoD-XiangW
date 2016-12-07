@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}GALLERY{% endblock %}
+
+{% block content %}
+{% if action == "user" %}
+
+  <table style="width:100%">
+    <tr>
+      <td style="width: 50%">
+
+	Gallery
+
+      </td>
+      <td style="width: 30%">
+      </td>
+      <td style="width: 20%">
+
+        <form action="/home">
+<input type="submit" value="Return" />
+            </form>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+
+  {% endblock %}
+
