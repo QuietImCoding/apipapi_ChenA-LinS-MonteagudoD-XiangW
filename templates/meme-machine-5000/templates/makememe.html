@@ -2,13 +2,14 @@
   <head>
     <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.5/p5.min.js"></script>
     <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.5/addons/p5.dom.min.js"></script>
-    <script src="sketch.js"></script>
+    <script src="/static/sketch.js"></script>
   </head>
   <body>
     <h1>Meme Maker 5000</h1>
+    <h2>{{ word }}</h1>
     <div id="meme-holder"></div>
     <br>
-    <input id="url" value="http://c7.staticflickr.com/6/5471/31317117526_326eae1da5_n.jpg" type="hidden">
+    <input id="url" value={{url}} type="hidden">
     <input id="top" type="text" placeholder="Top Row"/>
     <br><br>
     <input id="bottom" value="" type="text" placeholder="Bottom Row"/>
