@@ -1,5 +1,5 @@
 import requests, random
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -49,7 +49,9 @@ def findImage():
     else:
         return response
 
-
+@app.route("/makememe", methods=['POST'])
+def makememe():
+    return "<h1>%s</h1><p>%s</p>" % (request.form['title'], request.form['meme'])
 if __name__ == "__main__":
     app.run()
 
