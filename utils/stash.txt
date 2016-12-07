@@ -1,0 +1,3 @@
+CREATE TABLE userdata(id integer PRIMARY KEY, username varchar(64), nickname varchar(64), dob varchar(64), email varchar(64), location varchar(64), balance integer, lastmemesold integer);
+
+CREATE TABLE memelist(memeid integer PRIMARY KEY, price integer, owner integer, amtsold integer, ref text, FOREIGN KEY(owner) REFERENCES userdata(id));
