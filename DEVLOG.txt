@@ -5,9 +5,14 @@ danielM -- 2016-12-05 20:28
 sharonL --- 2016-12-06 06:15
 - added additional core folders (static, templates, utils, data)
 - created flask app for simple login/register and dashboard
+        --- 2016-12-06 12:38
+- moved db into data folder
 
 williamX --- 2016-12-06 13:13
 - added core folders, bootstrap src, and makefile
 
-sharonL --- 2016-12-06 12:38
-- moved db into data folder
+alanC --- 2016-12-06 14:00
+- create initial tables in dab.db
+- draw out methods in dbm.py (database manager)
+      --- 2016-12-06 21:00
+- flesh out add/get/set methods in dbm.py
