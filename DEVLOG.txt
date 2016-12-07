@@ -16,3 +16,23 @@ alanC --- 2016-12-06 14:00
 - draw out methods in dbm.py (database manager)
       --- 2016-12-06 21:00
 - flesh out add/get/set methods in dbm.py
+
+sharonL --- 2016-12-07 0:32
+- added routes for user gallery, main gallery, meme generation
+- added tentative methods for retrieving memes
+- added tentative methods for meme generation (needs processing script to be fully functional)
+
+williamX --- 2016-12-07 01:41
+- navbar complete in layout.html
+- made auth.html look nice
+- modified makefile to reflect increase of professionalism in name of driver py
+- created own main.css file to modify bootstrap defaults (instead of editing directly)
+
+
+
+
+
+
+
+
+

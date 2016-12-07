@@ -3,11 +3,9 @@
 <table style="width:100%">
     <tr>
         <td style="width: 50%">
-
             WELCOME
             <br> This is the front page
             <br>
-
         </td>
         <td style="width: 30%">
         </td>
@@ -17,7 +15,28 @@
                 <input type="submit" value="Logout" />
             </form>
 
+            <form action="/make_meme">
+                <input type="submit" value="Make A Meme" />
+            </form>
+
+            <form action="/display_memes">
+                <input type="submit" value="My Gallery" />
+            </form>
+
+            <form action="/display_all_memes">
+                <input type="submit" value="Main Gallery" />
+            </form>
+
         </td>
     </tr>
+</table>
+<br>
+
+<form action="/logout">
+    <input type="submit" value="Logout" />
+</form>
+
+</td>
+</tr>
 </table>
 <br> {% endblock content %}

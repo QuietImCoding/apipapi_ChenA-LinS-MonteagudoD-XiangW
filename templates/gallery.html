@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block title %}GALLERY{% endblock %}
+
+{% block content %}
+{% if action == "user" %}
+
+  <table style="width:100%">
+    <tr>
+      <td style="width: 50%">
+
+	My puny baby Gallery
+
+      </td>
+      <td style="width: 30%">
+      </td>
+      <td style="width: 20%">
+
+        <form action="/home">
+	  <input type="submit" value="Return" />
+            </form>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  {% endif %}
+
+{% if action == "all" %}
+
+  <table style="width:100%">
+    <tr>
+      <td style="width: 50%">
+
+	THE REALLY BIG Gallery
+
+      </td>
+      <td style="width: 30%">
+      </td>
+      <td style="width: 20%">
+
+        <form action="/home">
+	  <input type="submit" value="Return" />
+            </form>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  {% endif %}
+  {% endblock %}
+

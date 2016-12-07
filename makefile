@@ -1,8 +1,8 @@
 make: memer.py
-	#top kex wheats
+	#top wheat kex
 
 run: make
-	python memer.py
+	python app.py
 
 clean:
 	rm -f *~

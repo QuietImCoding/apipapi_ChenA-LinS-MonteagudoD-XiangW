@@ -1,12 +1,14 @@
 body {
     background-color: salmon;
-    padding-top: 100px;
+    padding-top: 100px; /* for navbar */
 }
 
+/* make dropdown options show up on hover vs on click */
 .dropdown:hover .dropdown-menu {
     display: block;
 }
 
+/* 'g's get cut off in forms on my computer, so quickfix*/
 .form-control {
     line-height: 1.25;
     font-size: 0.9rem;

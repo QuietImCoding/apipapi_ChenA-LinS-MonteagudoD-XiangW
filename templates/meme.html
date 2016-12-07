@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block title %}MEME 1{% endblock %}
+
+{% block content %}
+{% if action == "make" %}
+
+  <table style="width:100%">
+    <tr>
+      <td style="width: 50%">
+
+      This is the meme page
+
+      </td>
+      <td style="width: 30%">
+      </td>
+      <td style="width: 20%">
+
+	<form action="/save_meme">
+            <input type="submit" value="Save" />
+            </form>
+
+	<form action="/make_meme">
+            <input type="submit" value="Regenerate" />
+            </form>
+
+	<form action="/home">
+            <input type="submit" value="Return" />
+            </form>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+{% endif %}
+
+{% endblock %}
