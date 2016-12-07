@@ -59,16 +59,21 @@ def save_meme():
     if(secret in session):
         #do the saving meme thing here
         #to save the meme and associate it with a user
-        return render_template("index.html")
+        return render_template("gallery.html", action="user")
     return render_template('auth.html', action_type='login')
 
 @app.route("/display_memes")
 def display_memes():
     if(secret in session):
+        #displays only user's memes
+        return render_template("gallery.html", action="user")
+    return render_template('auth.html', action_type='login')
+
+@app.route("/display_all_memes")
+def display_all_memes():
+    if(secret in session):
         #this is to display all of the memes in the gallery
-        # I will make separate functions for main and 
-        #user specific galleries
-        return render_template("gallery.html")
+        return render_template("gallery.html", action="all")
     return render_template('auth.html', action_type='login')
 
 @app.route("/home")
