@@ -36,8 +36,13 @@ alanC --- 2016-12-07 14:00
 williamX --- 2016-12-08 02:32
 * Finished adding collapsible meme cards to main page
 
-
-
+sharonL --- 2016-12-08 02:56
+* finished fetching words/phrases from wordnik and images from flickr from API calls
+* integrated into main template
+* created buttons for navigation throughout pages
+* set if/else statements for login/logout buttons on main template
+* split sentences for photos into two lines
+* TODO: figure out how to overlay photos with text, add to database
 
 
 
