@@ -13,5 +13,10 @@
     <input id="top" type="text" placeholder="Top Row"/>
     <br><br>
     <input id="bottom" value="" type="text" placeholder="Bottom Row"/>
+    <form action="/makememe" method="POST">
+      <input name="title" type="text" placeholder="Meme Title"/>
+      <input id="memehidden" name="meme" type="hidden" value=""/>
+      <input value="submit" type="submit" value="" onclick="document.getElementById('memehidden').value = document.getElementById('defaultCanvas0').toDataURL(); console.log(document.getElementById('memehidden').value);"/>
+    </form>
   </body>
 </html>
