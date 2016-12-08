@@ -1,39 +1,66 @@
 {% extends "layout.html" %} {% block title %}The Meme Game{% endblock title %} {% block content %}
+<div class="container">
+  <div class="card">
+    <div class="card-header" role="tab">
+      <h5 class="mb-0">
+	<a data-toggle="collapse" href="#collapseOne">
+	  Your Memes
+	</a>
+      </h5>
+    </div>
 
-<table style="width:100%">
-    <tr>
-        <td style="width: 50%">
-            WELCOME
-            <br> This is the front page
-            <br>
-        </td>
-        <td style="width: 30%">
-        </td>
-        <td style="width: 20%">
+    <div id="collapseOne" class="collapse in" role="tabpanel">
+      <div class="card-block">
+	test
+      </div>
+    </div>
+  </div>
 
-            <form action="/logout">
-                <input type="submit" value="Logout" />
-            </form>
 
-            <form action="/make_meme">
-                <input type="submit" value="Make A Meme" />
-            </form>
 
-            <form action="/display_memes">
-                <input type="submit" value="My Gallery" />
-            </form>
+  <div class="card">
+    <div class="card-header" role="tab">
+      <h5 class="mb-0">
+	<a data-toggle="collapse" href="#collapseTwo">
+	  Your Memes
+	</a>
+      </h5>
+    </div>
 
-            <form action="/display_all_memes">
-                <input type="submit" value="Main Gallery" />
-            </form>
+    <div id="collapseTwo" class="collapse in" role="tabpanel">
+      <div class="card-block">
+	test
+      </div>
+    </div>
+  </div>
 
-        </td>
-    </tr>
+</div>
+
+
+
+<form action="/logout">
+  <input type="submit" value="Logout" />
+</form>
+
+<form action="/make_meme">
+  <input type="submit" value="Make A Meme" />
+</form>
+
+<form action="/display_memes">
+  <input type="submit" value="My Gallery" />
+</form>
+
+<form action="/display_all_memes">
+  <input type="submit" value="Main Gallery" />
+</form>
+
+</td>
+</tr>
 </table>
 <br>
 
 <form action="/logout">
-    <input type="submit" value="Logout" />
+  <input type="submit" value="Logout" />
 </form>
 
 </td>

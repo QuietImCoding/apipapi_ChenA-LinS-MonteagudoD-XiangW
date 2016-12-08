@@ -1,4 +1,4 @@
-make: memer.py
+make: app.py
 	#top wheat kex
 
 run: make
