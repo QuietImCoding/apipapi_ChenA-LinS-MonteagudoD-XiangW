@@ -21,21 +21,28 @@
         
         <ul class="nav navbar-nav nav-tabs bg-inverse">
             <li class="nav-item">
-                <a class="nav-link active bg-inverse" href="#">Home</a>
+                    <form action="/home" class="btn btn-primary" style="background:transparent; border:none"><input type="submit" style="background:none; border:none" value="Home"/></form>
             </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="#">Login/Register</a>
-            </li>       
-            
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Meme Market</a>
                 <div class="dropdown-menu bg-inverse text-danger">
-                    <a class="dropdown-item text-muted" href="#">Create a Meme</a>
+                    <form action="/make_meme" class="btn btn-primary" style="background:transparent; border:none"><input type="submit" style="background:none; border:none" value="Create a Meme"/></form>
                     <a class="dropdown-item text-muted" href="#">Buy a Meme</a>
-                    <a class="dropdown-item text-muted" href="#">View Memes</a>
+                    <form action="/display_memes" class="btn btn-primary" style="background:transparent; border:none"><input type="submit" style="background:none; border:none" value="View My Memes"/></form>
+                    <form action="/display_all_memes" class="btn btn-primary" style="background:transparent; border:none"><input type="submit" style="background:none; border:none" value="View All Memes"/></form>
                 </div>
             </li>
+
+	    <li>
+	    </li>
+            <li class="nav-item">
+	      {% if 'secret_cookie_key' in session %}
+              <form action="/logout" class="btn btn-primary" style="background:transparent; border:none"><input type="submit" style="background:none; border:none" value="Logout"/></form>
+            {% else %}
+            {% endif %}
+
+            </li>       
+            
 
             <span class="navbar-text lead float-xs-right text-muted">
                 {% if 'secret_cookie_key' in session %}

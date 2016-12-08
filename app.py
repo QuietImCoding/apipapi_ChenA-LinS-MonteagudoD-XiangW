@@ -1,5 +1,7 @@
-import utils.auth,  hashlib, os
+import utils.auth,  hashlib, os, json, random
 from flask import Flask, render_template, session, request, redirect, url_for
+import urllib, math, sys
+from itertools import count, groupby
 
 app = Flask(__name__)
 
@@ -46,13 +48,132 @@ def log_em_out():
 @app.route("/make_meme")
 def make_a_meme():
     if(secret in session):
-        #do the making meme thing here - I assume it's 
-        #randomly generated from Daniel's code???
-        #Ideally this also allows you to click this 
-        #as many time to generate new memes each time
-        #It's basically the random meme generator
-        return render_template("meme.html", action="make")
+        global current_word, examples, definitions
+        response = getImages()
+        photos = []
+        for photo in response['photos']['photo']:
+            photos.append([photo['farm'], photo['server'], photo['id'], photo['secret']])
+        urls = []
+        for photo in photos:
+            urls.append("https://farm%s.staticflickr.com/%s/%s_%s.jpg" % (photo[0], photo[1], photo[2], photo[3]))
+        example_random = random.randrange(len(examples))
+        example_used = examples[example_random]
+
+        page = '''
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <script type="text/javascript" src="/static/js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/tether.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+
+    <title>Meme Page</title>
+
+</head>
+
+<body>
+
+    <!-- navbar -->
+    <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+        <a class="navbar-brand text-success" href="#">The Meme Game</a>
+
+        <ul class="nav navbar-nav nav-tabs bg-inverse">
+            <li class="nav-item">
+                    <form action="/home" class="btn btn-primary" style="background:transparent; border:none"><input type="submit" style="background:no\
+ne; border:none" value="Home"/></form>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Meme Market</a>
+                <div class="dropdown-menu bg-inverse text-danger">
+                    <form action="/make_meme" class="btn btn-primary" style="background:transparent; border:none"><input type="submit" style="backgrou\
+nd:none; border:none" value="Create a Meme"/></form>
+                    <a class="dropdown-item text-muted" href="#">Buy a Meme</a>
+                    <form action="/display_memes" class="btn btn-primary" style="background:transparent; border:none"><input type="submit" style="back\
+ground:none; border:none" value="View My Memes"/></form>
+                    <form action="/display_all_memes" class="btn btn-primary" style="background:transparent; border:none"><input type="submit" style="\
+background:none; border:none" value="View All Memes"/></form>
+                </div>
+            </li>
+
+<li>
+            </li>
+            <li class="nav-item">
+              <form action="/logout" class="btn btn-primary" style="background:transparent; border:none"><input type="submit" style="background:none; \
+border:none" value="Logout"/></form>
+
+            </li>
+
+
+            <span class="navbar-text lead float-xs-right text-muted">
+                    Logged in as:
+                <u>Marshall Mathers</u>
+            </span>
+</ul>
+    </nav>
+''' 
+        
+        #page += "<br><br><center><h5>%s</h5>" % (current_word)
+        page += "<br><br><center>"
+        for line in split_lines(example_used, len(example_used)/2):
+            page += "<h5>%s</h5>" % (line)
+        url_random = random.randrange(len(urls))
+        page += "<img src='%s'/></center><br><br>" % urls[url_random]
+        page += "</body></html>"
+        return page
+
     return render_template('auth.html', action_type='login')
+def getImages():
+    global current_word, examples, definitions
+    wordnik_key = "40dc55834c419934220050a79fd0655dbb1f88083bc729ad9"
+    current_word = get_random_word(wordnik_key)
+    examples = get_examples(wordnik_key, current_word)
+    definitions = get_definition(wordnik_key, current_word)
+    api_key = '8746e5a7e804588f2c14eee32778068b'
+    response = urllib.urlopen('https://api.flickr.com/services/rest/?' + urllib.urlencode({'api_key':api_key, 'safe_search':'1', 'method':'flickr.photos.search', 'tags':current_word, 'format':'json', 'nojsoncallback':'1'}))
+    response_data = json.loads(response.read())
+    response_value = response_data['photos']['total']
+    if response_value==0:
+        return getImages()
+    else:
+        return response_data
+def get_examples(api_key, word):
+    resp = urllib.urlopen('http://api.wordnik.com/v4/word.json/' + word + '/examples?' + urllib.urlencode({'api_key': api_key}))
+    examples_data = json.loads(resp.read())
+    examples = [item['text'] for item in examples_data['examples']]
+    return examples
+def get_definition(api_key, word):
+    resp = urllib.urlopen('http://api.wordnik.com/v4/word.json/' + word + '/definitions?' + urllib.urlencode({'api_key': api_key}))
+    definitions_data = json.loads(resp.read())
+    definitions = [item['text'] for item in definitions_data]
+    return definitions
+def get_random_word(api_key):
+    resp = urllib.urlopen(
+        'http://api.wordnik.com/v4/words.json/randomWord?' +
+        urllib.urlencode({'minCorpusCount': 10000, 'api_key': api_key}))
+    random_word_data = json.loads(resp.read())
+    return random_word_data['word']
+def split_lines(s, step):
+    words = s.split()
+    firsthalf = ""
+    secondhalf = ""
+    upper = 0
+    for i in range(int(math.ceil(len(words)/2.0))):
+        firsthalf += words[upper] + " "
+        upper += 1
+    for i in range(int(math.floor(len(words)/2.0))):
+        secondhalf += words[upper] + " "
+        upper += 1
+    splits = [firsthalf, secondhalf]
+    return splits
+
+    c = count()
+    chunks = sentence.split()
+    return [' '.join(g) for k, g in groupby(chunks, lambda i: c.next() // step)]
+
+
 
 @app.route("/save_meme")
 def save_meme():
