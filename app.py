@@ -116,7 +116,7 @@ def split_lines(s, step):
 
 
 @app.route("/save_meme", methods=["GET", "POST"])
-def save_meme(ownerid, url):
+def save_meme():
     if(secret in session):
         #do the saving meme thing here
         #to save the meme and associate it with a user
