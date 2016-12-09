@@ -1,9 +1,9 @@
 {% extends "layout.html" %} {% block title %} Meme Maker {% endblock title %} 
 
 {% block head %}
-<script type="text/javascript" src="/static/js/p5.min.js"></script>
-<script type="text/javascript" src="/static/js/p5.dom.min.js"></script>
-<script type="text/javascript" src="/static/js/sketch.js"></script>
+<script language="javascript" type="text/javascript" src="/static/js/p5.min.js"></script>
+<script language="javascript" type="text/javascript" src="/static/js/p5.dom.min.js"></script>
+<script language="javascript" type="text/javascript" src="/static/js/sketch.js"></script>
 <title>MEME 1</title>
 {% endblock head %}
 
@@ -11,7 +11,8 @@
 
 {% block content %}
 
-{% if action == "make" %}
+{% if action_type == "make" %}
+
 
 <table style="width:100%">
   <tr>
@@ -20,21 +21,21 @@
       This is the meme page
 
     </td>
-    <td style="width: 30%">
+  </tr>
+  <tr>
+    <td style="width: 50%">
+      <div id="meme-holder"></div>
     </td>
-    <td style="width: 20%">
+    <td style="width: 50%">
 
 
-      <form action="/save_meme">
-	<div id="meme-holder">
-	  <div id="url"></div>
-	</div>
-	<input type="text" id="top" name="top">
-	<input type="text" id="bottom" name="bottom">
-	<input id="memehidden" name="meme" type="hidden">
+      <input type="text" id="top" name="top">
+      <input type="text" id="bottom" name="bottom">
+      <input id="url" name="imgurl" type="hidden" value="{{image_url}}">
+      <input id="memehidden" name="meme" type="hidden">
+      <form action="/save_meme" method="POST">
         <input type="submit" value="save" onclick="document.getElementById('memehidden').value = document.getElementById('defaultCanvas0').toDataURL();">
       </form>
-
     </td>
   </tr>
 </table>
