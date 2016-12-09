@@ -1,4 +1,4 @@
-import utils.auth,  hashlib, os, json, random
+import utils.auth,  hashlib, os, json, random, utils.dbm
 import sqlite3
 from flask import Flask, render_template, session, request, redirect, url_for
 import urllib, math, sys
