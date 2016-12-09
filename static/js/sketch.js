@@ -2,7 +2,7 @@ var img;
 var imgwidth, imgheight;
 var topstr, bottomstr;
 var topSize, bottomSize;
-
+var topStroke, bottomStroke;
 function preload() {
     img = loadImage(select("#url").value());
 }
@@ -24,8 +24,8 @@ function draw() {
     image(img, 0, 0);
     topSize = width/topstr.value().length * max((img.height/img.width), (img.width/img.height));
     bottomSize = width/bottomstr.value().length * max((img.height/img.width), (img.width/img.height));
-    if(topSize > height/5) { topSize = height/5; }
-    if(bottomSize > height/5) {bottomSize = height/5;}
+    if(topSize > height/2) { topSize = height/5; }
+    if(bottomSize > height/2) {bottomSize = height/5;}
     var topStroke = topSize/20;
     var bottomStroke = bottomSize/20;
     textSize(topSize);
