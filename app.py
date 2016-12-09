@@ -1,4 +1,5 @@
 import utils.auth,  hashlib, os, json, random
+import sqlite3, display
 from flask import Flask, render_template, session, request, redirect, url_for
 import urllib, math, sys
 from itertools import count, groupby
@@ -115,10 +116,11 @@ def split_lines(s, step):
 
 
 @app.route("/save_meme", methods=["GET", "POST"])
-def save_meme():
+def save_meme(ownerid, url):
     if(secret in session):
         #do the saving meme thing here
         #to save the meme and associate it with a user
+        utils.dbm.add_meme(100,utils.dbm.get_id(session[secret]),request.form['meme']) 
         return render_template("gallery.html", action="user")
     return render_template('auth.html', action_type='login')
 
@@ -126,6 +128,7 @@ def save_meme():
 def display_memes():
     if(secret in session):
         #displays only user's memes
+        utils.dhm.getall()
         return render_template("gallery.html", action="user")
     return render_template('auth.html', action_type='login')
 
