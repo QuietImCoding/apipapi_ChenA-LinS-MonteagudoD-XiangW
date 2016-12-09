@@ -59,8 +59,8 @@ def make_a_meme():
         example_random = random.randrange(len(examples))
         example_used = examples[example_random]
 
-        
-        return render_template('meme.html', action_type='make')
+        print(urls[0])
+        return render_template('meme.html', action_type='make', image_url=urls[0])
 
     return render_template('auth.html', action_type='login')
 
