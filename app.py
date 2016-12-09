@@ -45,7 +45,7 @@ def log_em_out():
     session.pop(secret)
     return redirect(url_for("index")) #redirect(url_for("log_em_in"))
 
-@app.route("/make_meme")
+@app.route("/make_meme", methods=["GET","POST"])
 def make_a_meme():
     if(secret in session):
         global current_word, examples, definitions
@@ -114,7 +114,7 @@ def split_lines(s, step):
 
 
 
-@app.route("/save_meme")
+@app.route("/save_meme", methods=["GET", "POST"])
 def save_meme():
     if(secret in session):
         #do the saving meme thing here
