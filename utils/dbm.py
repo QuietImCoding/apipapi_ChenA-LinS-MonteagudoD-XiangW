@@ -1,6 +1,6 @@
 import sqlite3
 
-db = sqlite3.connect("/data/dab.db")
+db = sqlite3.connect("data/dab.db", check_same_thread=False)
 d = db.cursor()
 
 # =========== START ACCESSOR METHODS =============
