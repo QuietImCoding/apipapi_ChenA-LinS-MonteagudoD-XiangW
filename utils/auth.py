@@ -3,12 +3,12 @@ import hashlib, sqlite3
 #faciliates logins
 def login(g_username, g_password):
     #===========OPENING THE DB=============
-    f="data/memers.db"
+    f="data/dab.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     #=================================================
     
-    c.execute("SELECT password FROM users WHERE username="+"'"+g_username+"'"+";")
+    c.execute("SELECT password FROM userdata WHERE username="+"'"+g_username+"'"+";")
     pass_hold = c.fetchall()
 
     #the for loops only fire if there is something in pass_hold,
@@ -38,11 +38,11 @@ def make_account(g_username, g_password1, g_password2, email):
         return False
     
     #===========OPENING THE DB=============
-    f="data/memers.db"
+    f="data/dab.db"
     db = sqlite3.connect(f);
     c = db.cursor()
     #=================================================
-    c.execute("SELECT username FROM users WHERE username="+"'"+g_username+"'"+";")
+    c.execute("SELECT username FROM userdata WHERE username="+"'"+g_username+"'"+";")
     hold = c.fetchall()
 
     #=============CLOSE DB
@@ -55,12 +55,12 @@ def make_account(g_username, g_password1, g_password2, email):
         return False
 
     #==============OPEN DB
-    f="data/memers.db"
+    f="data/dab.db"
     db = sqlite3.connect(f);
     c = db.cursor()
     #===============
     
-    c.execute('INSERT INTO users VALUES("'+g_username+'"'+','+'"'+g_password1+'"'+','+'"'+email+'");')
+    c.execute('INSERT INTO userdata (username, password, email) VALUES("'+g_username+'","'+g_password1+'","'+email+'");')
 
     #===============CLOSE
     db.commit()
