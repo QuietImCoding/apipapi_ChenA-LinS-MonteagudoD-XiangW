@@ -7,7 +7,6 @@ function preload() {
 }
 
 function setup() {
-
     imgwidth = img.width;
     imgheight = img.height;
     var canvas = createCanvas(imgwidth, imgheight);
