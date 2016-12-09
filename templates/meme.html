@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout.html" %} {% block title %} Meme Maker {% endblock title %} 
 
 {% block head %}
 <script type="text/javascript" src="/static/js/p5.min.js"></script>
@@ -10,6 +10,7 @@
 
 
 {% block content %}
+
 {% if action == "make" %}
 
 <table style="width:100%">
@@ -33,13 +34,6 @@
         <input type="submit" value="save" onclick="document.getElementById('memehidden').value = document.getElementById('defaultCanvas0').toDataURL();">
       </form>
 
-      <form action="/make_meme">
-        <input type="submit" value="Regenerate" />
-      </form>
-
-      <form action="/home">
-        <input type="submit" value="Return" />
-      </form>
     </td>
   </tr>
 </table>
