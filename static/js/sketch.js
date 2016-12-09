@@ -1,6 +1,7 @@
 var img;
 var imgwidth, imgheight;
 var topstr, bottomstr;
+var topSize, bottomSize;
 
 function preload() {
     img = loadImage(select("#url").value());
@@ -21,8 +22,9 @@ function draw() {
     stroke(0);
     fill(255);
     image(img, 0, 0);
-    var topSize = width/topstr.value().length * 2;
-    var bottomSize = width/bottomstr.value().length * 2;
+    
+    topSize = width/topstr.value().length * max((img.height/img.width), (img.width/img.height));
+    bottomSize = width/bottomstr.value().length * max((img.height/img.width), (img.width/img.height));
     var topStroke = topSize/20;
     var bottomStroke = bottomSize/20;
     textSize(topSize);
