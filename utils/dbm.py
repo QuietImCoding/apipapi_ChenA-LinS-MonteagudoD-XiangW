@@ -1,6 +1,6 @@
 import sqlite3
 
-db = sqlite3.connect("../data/dab.db")
+db = sqlite3.connect("/data/dab.db")
 d = db.cursor()
 
 # =========== START ACCESSOR METHODS =============
@@ -47,7 +47,7 @@ def get_owned(userid):
 
 # returns dataurl of all memes
 def get_all():
-    q = 'SELECT ref FROM memelist'
+    q = 'SELECT ref FROM memelist;'
     d.execute(q)
     r = d.fetchall()
 
@@ -95,35 +95,42 @@ def get_ref(memeid):
 # =========== END ACCESSOR METHODS =============
 
 # =========== START MUTATOR METHODS ================
-def add_meme(price, owner, url):
-    q = 'INSERT INTO memelist(price, owner, amtsold, ref) VALUES (%s, %s, 1, \"%s\");' % (price, owner, url)
+
+# takes price/numerical ownerid/dataurl, saves to memelist
+def add_meme(price, ownerid, url):
+    q = 'INSERT INTO memelist(price, owner, amtsold, ref) VALUES (%s, %s, 1, \"%s\");' % (price, ownerid, url)
     d.execute(q)
 
     db.commit()
 
-def set_owner(url, nowner):
-    q = 'UPDATE memelist SET owner=%s WHERE url=\"%s\";' % (nowner, url)
+# takes dataurl/numerical ownerid, sets current ownerid to nownerid
+def set_owner(url, nownerid):
+    q = 'UPDATE memelist SET owner=%s WHERE url=\"%s\";' % (nownerid, url)
     d.execute(q)
     db.commit()
 
+# takes dataurl/price, sets current price to nprice
 def set_price(url, nprice):
     q = 'UPDATE memelist SET price=%s WHERE url=\"%s\";' % (nprice, url)
     d.execute(q)
 
     db.commit()
 
+# takes dataurl, increments amtsold by one
 def incrmt_amtsold(url):
     q = 'UPDATE memelist SET amtsold=amtsold + 1 WHERE url=\"%s\";' % (url)
     d.execute(q)
 
     db.commit()
 
+# takes numerical userid/balance, sets current balance to nbalance
 def set_balance(userid, nbalance):
     q = 'UPDATE userdata SET balance=%s WHERE username=\"%s\";' % (nbalance, userid)
     d.execute(q)
 
     db.commit()
 
+# takes 
 def set_lastmemesold(userid, nmemeid):
     q = 'UPDATE userdata SET lastmemesold=%s WHERE username=\"%s\";' % (nmemeid, userid)
     d.execute(q)
