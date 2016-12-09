@@ -3,8 +3,7 @@ var imgwidth, imgheight;
 var topstr, bottomstr;
 
 function preload() {
-    img = loadImage(select("#url").value())
-
+    img = loadImage(select("#url").value());
 }
 
 function setup() {
@@ -16,8 +15,6 @@ function setup() {
     textSize(50);
     topstr = select("#top");
     bottomstr = select("#bottom");
-    console.log(topstr);
-    console.log(bottomstr);
 }
 
 function draw() {
