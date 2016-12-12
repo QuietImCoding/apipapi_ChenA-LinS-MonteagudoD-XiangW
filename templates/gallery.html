@@ -1,45 +1,84 @@
-{% extends "layout.html" %}
-{% block title %}GALLERY{% endblock %}
+{% extends "layout.html" %} {% block title %}GALLERY{% endblock title %} {% block content %} {% if action == "user" %}
+<h2>My puny baby Gallery</h2> {% endif %} {% if action == "all" %}
 
-{% block content %}
-{% if action == "user" %}
+<h2>Meme Gallery</h2>
 
-  <table style="width:100%">
-    <tr>
-      <td style="width: 50%">
 
-	My puny baby Gallery
+<div class="card-columns">
+    <div class="card">
+        <img class="card-img-top img-fluid" src="..." alt="Card image cap">
+        <div class="card-block">
+            <h4 class="card-title">Card title that wraps to a new line</h4>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        </div>
+    </div>
+    <div class="card card-block">
+        <blockquote class="card-blockquote">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+            <footer>
+                <small class="text-muted">
+          Someone famous in <cite title="Source Title">Source Title</cite>
+        </small>
+            </footer>
+        </blockquote>
+    </div>
+    <div class="card">
+        <img class="card-img-top img-fluid" src="..." alt="Card image cap">
+        <div class="card-block">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+    <div class="card card-block card-inverse card-primary text-xs-center">
+        <blockquote class="card-blockquote">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat.</p>
+            <footer>
+                <small>
+          Someone famous in <cite title="Source Title">Source Title</cite>
+        </small>
+            </footer>
+        </blockquote>
+    </div>
+    <div class="card card-block text-xs-center">
+        <h4 class="card-title">Card title</h4>
+        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+    <div class="card">
+        <img class="card-img img-fluid" src="..." alt="Card image">
+    </div>
+    <div class="card card-block text-xs-right">
+        <blockquote class="card-blockquote">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+            <footer>
+                <small class="text-muted">
+          Someone famous in <cite title="Source Title">Source Title</cite>
+        </small>
+            </footer>
+        </blockquote>
+    </div>
+    <div class="card">
+        <img class="card-img img-fluid" src="/static/images/hilarious.jpg" alt="Card image">
+        <div class="card-img-overlay">
+            <h4 class="card-title">Card title</h4>
+            <p class="card-text">ad-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
 
-      </td>
-      <td style="width: 30%">
-      </td>
-      <td style="width: 20%">
+</div>
 
-      </td>
-    </tr>
-  </table>
-  <br>
 
-  {% endif %}
+<div class="card">
+  <img class="card-img-top" src="/static/images/hilarious.jpg" alt="Card image cap">
+  <div class="card-block">
+    <h4 class="card-title">Card title</h4>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
 
-{% if action == "all" %}
 
-  <table style="width:100%">
-    <tr>
-      <td style="width: 50%">
 
-	THE REALLY BIG Gallery
-
-      </td>
-      <td style="width: 30%">
-      </td>
-      <td style="width: 20%">
-
-      </td>
-    </tr>
-  </table>
-  <br>
-
-  {% endif %}
-  {% endblock %}
-
+{% endif %} {% endblock content%}
