@@ -43,21 +43,18 @@
           </div>
         </li>
 
-	<li>
-	</li>
         <li class="nav-item">
 	  {% if 'secret_cookie_key' in session %}
-          <a class="dropdown-item text-muted" href="/logout">Logout</a>
+          <a class="nav-link bg-inverse" href="/logout">Logout</a>
           {% else %}
           {% endif %}
-
-        </li>       
+        </li>     
         
 
         <span class="navbar-text lead float-xs-right text-muted">
           {% if 'secret_cookie_key' in session %}
           Logged in as:
-          <u>Marshall Mathers</u>
+          <u>{{ session['secret_cookie_key'] }}</u>
           {% else %}
           Not currently logged in!
           {% endif %}
