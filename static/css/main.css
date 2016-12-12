@@ -30,22 +30,12 @@ body {
 .card-img-overlay .card-text,
 .card-img-overlay .card-text small
 {
-    color: red;
+    
 }
 
-.card-columns {
-    display: table;
-    width: 100%;
-    margin-bottom: 0.75rem;
-    table-layout: fixed;
-    border-spacing: 1.25rem 0;
-}
-
-.card-columns .card {
-    display: table-cell;
-    margin-bottom: 0;
-    height: 30px;
-    vertical-align: top;
+.wrapx {
+    display: inline-block;
+    color: blue;
 }
 
 
