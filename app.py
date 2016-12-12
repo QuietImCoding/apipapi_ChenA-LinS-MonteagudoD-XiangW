@@ -171,6 +171,7 @@ def create_dat_account():
 
     if(is_user_now == True):
         #return redirect(url_for("log_em_in"))
+        session[secret] = wanted_user
         return redirect(url_for("index")) #redirect(url_for("log_em_in"))
     #else
     return render_template('auth.html', action_type='mk_act')
