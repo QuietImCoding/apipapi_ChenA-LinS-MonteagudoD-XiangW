@@ -1,4 +1,7 @@
-{% extends "layout.html" %} {% block title %}GALLERY{% endblock title %} {% block content %} {% if action == "user" %}
+{% extends "layout.html" %} {% block head %}
+<link rel="stylesheet" type="text/css" href="/static/css/ekko-lightbox.min.css">
+<script type="text/javascript" src="/static/js/ekko-lightbox.min.js"></script>
+{% endblock head %}{% block title %}GALLERY{% endblock title %} {% block content %} {% if action == "user" %}
 <h2>My puny baby Gallery</h2> {% endif %} {% if action == "all" %}
 
 <h2>Meme Gallery</h2>
