@@ -47,3 +47,7 @@ sharonL --- 2016-12-08 02:56
 williamX --- 2016-12-08 13:57
 * kek
 
+alanC --- 2016-12-12 14:00
+* inserted more helpful comments
+* add exhange_meme fxntionality
+
