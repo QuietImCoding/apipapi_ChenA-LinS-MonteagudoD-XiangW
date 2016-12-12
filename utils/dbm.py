@@ -5,17 +5,17 @@ d = db.cursor()
 
 # =========== START ACCESSOR METHODS =============
 
-# takes dataurl of image, returns price of meme 
-def get_price(url):
-    q = 'SELECT price FROM memelist WHERE ref=\"%s\";' % (url)
+# takes memeid, returns price of meme 
+def get_price(memeid):
+    q = 'SELECT price FROM memelist WHERE memeid=\"%s\";' % (memeid)
     d.execute(q)
     r = d.fetchall()
 
     return r[0][0]
 
-# takes dataurl of image, returns owner of meme
-def get_owner(url):
-    q = 'SELECT owner FROM memelist WHERE ref=\"%s\";' % (url)
+# takes memeid, returns owner of meme
+def get_owner(memeid):
+    q = 'SELECT owner FROM memelist WHERE memeid=\"%s\";' % (memeid)
     d.execute(q)
     r = d.fetchall()
 
@@ -29,9 +29,9 @@ def get_id(username):
 
     return r[0][0]
 
-# takes dataurl of image, returns amt of times meme was sold
-def get_amtsold(url):
-    q = 'SELECT amtsold FROM memelist WHERE ref=\"%s\";' % (url)
+# takes memeid, returns amt of times meme was sold
+def get_amtsold(memeid):
+    q = 'SELECT amtsold FROM memelist WHERE memeid=\"%s\";' % (memeid)
     d.execute(q)
     r = d.fetchall()
 
@@ -45,13 +45,17 @@ def get_owned(userid):
 
     return r[0]
 
-# returns dataurl of all memes
+# returns dataurl, price, and memeid of all memes
 def get_all():
-    q = 'SELECT ref FROM memelist;'
+    q = 'SELECT memeid, price, ref FROM memelist;'
     d.execute(q)
     r = d.fetchall()
 
-    return r[0]
+    ret = dict()
+    for t in r:
+        ret[t[2]] = [t[0], t[1]] #ref: [memeid, price]
+
+    return ret
 
 # returns dataurls of the five most expensive memes
 def get_topfive():
@@ -92,6 +96,7 @@ def get_ref(memeid):
     r = d.fetchall()
 
     return r[0][0]
+
 # =========== END ACCESSOR METHODS =============
 
 # =========== START MUTATOR METHODS ================
@@ -116,9 +121,9 @@ def set_price(url, nprice):
 
     db.commit()
 
-# takes dataurl, increments amtsold by one
-def incrmt_amtsold(url):
-    q = 'UPDATE memelist SET amtsold=amtsold + 1 WHERE url=\"%s\";' % (url)
+# takes memeid, increments amtsold by one
+def incrmt_amtsold(memeid):
+    q = 'UPDATE memelist SET amtsold=amtsold + 1 WHERE memeid=\"%s\";' % (memeid)
     d.execute(q)
 
     db.commit()
@@ -130,11 +135,25 @@ def set_balance(userid, nbalance):
 
     db.commit()
 
-# takes 
+# takes numerical userid/memeid, sets user's lastmemesold to nmemeid
 def set_lastmemesold(userid, nmemeid):
     q = 'UPDATE userdata SET lastmemesold=%s WHERE username=\"%s\";' % (nmemeid, userid)
     d.execute(q)
 
     db.commit()
 
+# buyer buys meme (memeid) from seller, incrmentamtsold 
+def exhange_meme(seller, buyer, memeid):
+    price = get_price(memeid)
+    
+    q = 'UPDATE userdata SET balance=balance + %s WHERE username=\"%s\";' % (price, buyer)
+    d.execute(q)
+    q = 'UPDATE userdata SET balance=balance - %s WHERE username=\"%s\";' % (price, seller)
+    d.execute(q)
+    q = 'UPDATE memelist SET owner=%s WHERE memeid=%s;' % (buyer, memeid)
+    d.execute(q)
+    
+    incrmnt_amtsold(memeid)
+
+    db.commit()
 # =========== END MUTATOR METHODS ================
