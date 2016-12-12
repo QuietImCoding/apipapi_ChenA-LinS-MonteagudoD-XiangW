@@ -33,15 +33,9 @@ body {
     
 }
 
-.wrapx {
-    display: inline-block;
-    color: blue;
-}
-
-
 
 .hovereffect {
-width:100%;
+width:auto;
 height:100%;
 float:left;
 overflow:hidden;
