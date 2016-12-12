@@ -26,11 +26,11 @@ function draw() {
     image(img, 0, 0);
     
     //topLines = topstr.value().match(/.{1,15}/g);
-    /*size = 15;
-      topLines = topstr.value().match(new RegExp('.{1,' + size + '}', 'g'));*/
-    topLines = split_line(topstr.value(), 4);
-    console.log(topLines);
-    if (topLines != null && topLines.length > 0) {
+    size = 20;
+    topLines = topstr.value().match(new RegExp('.{1,' + size + '}', 'g'));
+    //topLines = split_line(topstr.value(), 4);
+
+    if (topLines != null /*&& topLines.length > 0*/) {
 	topSize = width/(topLines[0].length + topLines.length) * max((img.height/img.width), (img.width/img.height));
 	if(topSize > height/2) { topSize = height/2; }
 	textSize(topSize * 1.5);
@@ -39,10 +39,10 @@ function draw() {
 	    text(topLines[i], width/2, (topSize * 1.5)/4*3 * (i+1));
 	}
     }
-    
-    bottomLines = split_line(bottomstr.value(), 4);
+    bottomLines = bottomstr.value().match(new RegExp('.{1,' + size + '}', 'g'));
+    //bottomLines = split_line(bottomstr.value(), 4);
     //bottomLines = bottomstr.value().match(/.{1,15}/g);
-    if (bottomLines != null && bottomLines.length > 0) {
+    if (bottomLines != null /*&& bottomLines.length > 0*/) {
 	bottomSize = width/(bottomLines[0].length + bottomLines.length) * max((img.height/img.width), (img.width/img.height));
 	if(bottomSize > height/2) {bottomSize = height/2;}
 	textSize(bottomSize);
@@ -65,7 +65,6 @@ function split_line(string, step) {
 	    line = "";
 	} 
     }
-
     return strings;
 }
 
