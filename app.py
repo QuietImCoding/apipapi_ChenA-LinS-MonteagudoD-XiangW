@@ -125,14 +125,36 @@ def save_meme():
     return render_template('auth.html', action_type='login')
 
 @app.route("/display_memes")
+def sample_meme():
+    f = "data/dab.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+
+    c.execute("SELECT owner, ref FROM memelist")
+    hold = c.fetchall()
+
+    db.commit()
+    db.close()
+
+    mylist = []
+    for line in hold:
+        mydict = {}
+        mydict['creator'] = str(line[1])
+        mydict['create_ts'] = 'Monday, 12-Dec-16 12:39:25 UTC'
+        mydict['base64str'] = line[0]
+        mylist.append(mydict)
+
+    return mylist
+
 def display_memes():
     if(secret in session):
         #displays only user's memes
         utils.dhm.getall()
-        return render_template("gallery.html", action="user")
+        return render_template("gallery.html", action="user", sampleMemes = sample_meme())
     return render_template('auth.html', action_type='login')
 
 @app.route("/display_all_memes")
+
 def display_all_memes():
     if(secret in session):
         #this is to display all of the memes in the gallery
