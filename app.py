@@ -65,6 +65,16 @@ def make_a_meme():
 
     return render_template('auth.html', action_type='login')
 
+@app.route("/buy_meme", methods=["GET", "POST"])
+def disp_buymeme():
+    buyerid = get_id(session[secret])
+    sellerid = get_id(get_owner(request.form['memeid']))
+    price = get_price(request.form['memeid'])
+    
+    utils.dbm.exchange_meme(sellerid, buyerid, price)
+
+    return redirect(url_for("index"))
+
 def getImages():
     global current_word, examples, definitions
     wordnik_key = "40dc55834c419934220050a79fd0655dbb1f88083bc729ad9"
@@ -149,8 +159,8 @@ def sample_meme():
 def display_memes():
     if(secret in session):
         #displays only user's memes
-        utils.dhm.getall()
-        return render_template("gallery.html", action="user", sampleMemes = sample_meme())
+        memelist = utils.dhm.get_all()
+        return render_template("gallery.html", action="user", sampleMemes = memelist)
     return render_template('auth.html', action_type='login')
 
 @app.route("/display_all_memes")
