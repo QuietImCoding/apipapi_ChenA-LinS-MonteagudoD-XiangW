@@ -10,9 +10,10 @@
 <input type="text" id="top" name="top">
 <input type="text" id="bottom" name="bottom">
 <input id="url" name="imgurl" type="hidden" value="{{image_url}}">
-<input id="memehidden" name="meme" type="hidden">
+
 <form action="/save_meme" method="POST">
-    <input type="submit" value="save" onclick="document.getElementById('memehidden').value = document.getElementById('defaultCanvas0').toDataURL();">
+  <input id="memehidden" name="meme" type="hidden">
+  <input type="submit" value="save" onclick="alert(document.getElementById('defaultCanvas0'));document.getElementById('memehidden').value = document.getElementById('defaultCanvas0').toDataURL();">
 </form>
 {% endif %}
 
