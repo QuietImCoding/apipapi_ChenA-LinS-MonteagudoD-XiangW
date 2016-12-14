@@ -144,7 +144,7 @@ def sample_meme():
         mydict['base64str'] = line[0]
         mylist.append(mydict)
 
-    return mylist
+    return render_template("gallery.html", sampleMemes = mylist);
 
 def display_memes():
     if(secret in session):

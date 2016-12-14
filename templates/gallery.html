@@ -5,7 +5,7 @@
 <h2>My puny baby Gallery</h2> {% endif %} {% if action == "all" %}
 
 <h1 class="text-md-center display-3 mb-3"><b>Meme Gallery</b></h1>
-
+{% endif %}
 
 <!--
 {% set sampleMemes = [
@@ -51,4 +51,4 @@ $(document).on('click', '[data-toggle="lightbox"]', function(event) {
     $(this).ekkoLightbox();
 })
 </script>
-{% endif %} {% endblock content%}
+{% endblock content%}
