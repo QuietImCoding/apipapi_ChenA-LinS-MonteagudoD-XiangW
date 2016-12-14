@@ -151,9 +151,9 @@ def sample_meme():
     mylist = []
     for line in hold:
         mydict = {}
-        mydict['creator'] = str(line[1])
+        mydict['creator'] = str(line[0])
         mydict['create_ts'] = 'Monday, 12-Dec-16 12:39:25 UTC'
-        mydict['base64str'] = line[0]
+        mydict['base64str'] = line[1]
         mylist.append(mydict)
 
     return render_template("gallery.html", sampleMemes = mylist);
