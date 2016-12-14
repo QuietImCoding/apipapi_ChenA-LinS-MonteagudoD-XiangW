@@ -79,11 +79,15 @@ def disp_buymeme():
 
 def getImages():
     global current_word, examples, definitions
-    wordnik_key = "40dc55834c419934220050a79fd0655dbb1f88083bc729ad9"
+    keyfile = open("wordnik.key", 'r')
+    wordnik_key = keyfile.read()
+    keyfile.close();
     current_word = get_random_word(wordnik_key)
     examples = get_examples(wordnik_key, current_word)
     definitions = get_definition(wordnik_key, current_word)
-    api_key = '8746e5a7e804588f2c14eee32778068b'
+    keyfile = open("flickr.key", 'r')
+    api_key = keyfile.read()
+    keyfile.close();
     response = urllib.urlopen('https://api.flickr.com/services/rest/?' + urllib.urlencode({'api_key':api_key, 'safe_search':'1', 'method':'flickr.photos.search', 'tags':current_word, 'format':'json', 'nojsoncallback':'1'}))
     response_data = json.loads(response.read())
     response_value = response_data['photos']['total']
