@@ -21,6 +21,14 @@ def get_owner(memeid):
 
     return r[0][0]
 
+# takes userid, returns username
+def get_username(userid):
+    q = 'SELECT username FROM userdata WHERE id='+str(userid)+';'
+    d.execute(q)
+    r = d.fetchall()
+    
+    return r[0][0]
+
 # takes session username, returns numerical id of username in db
 def get_id(username):
     q = 'SELECT id FROM userdata WHERE username=\"%s\";' % (username)
@@ -56,6 +64,44 @@ def get_all():
         ret[t[2]] = [t[0], t[1]] #ref: [memeid, price]
 
     return ret
+
+#returns dataurl, price, and memeid of user's memes
+def get_yours(user):
+    db1 = sqlite3.connect("data/dab.db", check_same_thread=False)
+    d1 = db1.cursor()
+    q = 'SELECT memeid, price, ref FROM memelist WHERE username='+user+';'
+    d1.execute(q)
+    r = d1.fetchall()
+    db1.commit()
+    db1.close()
+    ret = dict()
+    for t in r:
+        ret[t[2]] = [t[0], t[1]] #ref: [memeid, price]
+
+    return ret
+
+def sample_meme():
+    f = "data/dab.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+
+    c.execute("SELECT owner, ref FROM memelist")
+    hold = c.fetchall()
+
+    db.commit()
+    db.close()
+
+    list = []
+    for line in hold:
+        print("Entry")
+        print(line)
+        dict = {}
+        dict['creator'] = str(get_username(line[0]))
+        dict['create_ts'] = 'Monday, 12-Dec-16 12:39:25 UTC'
+        dict['base64str'] = str(line[1])
+        list.append(dict)
+
+    return list
 
 # returns dataurls of the five most expensive memes
 def get_topfive():
