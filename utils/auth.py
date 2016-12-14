@@ -60,7 +60,7 @@ def make_account(g_username, g_password1, g_password2, email):
     c = db.cursor()
     #===============
     
-    c.execute('INSERT INTO userdata (username, password, email) VALUES("'+g_username+'","'+g_password1+'","'+email+'");')
+    c.execute('INSERT INTO userdata (username, password, email, balance) VALUES("'+g_username+'","'+g_password1+'","'+email+'", 1000);')
 
     #===============CLOSE
     db.commit()
