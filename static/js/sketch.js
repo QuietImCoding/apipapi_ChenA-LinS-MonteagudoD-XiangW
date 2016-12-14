@@ -33,10 +33,10 @@ function draw() {
     if (topLines != null /*&& topLines.length > 0*/) {
 	topSize = width/(topLines[0].length + topLines.length) * max((img.height/img.width), (img.width/img.height));
 	if(topSize > height/2) { topSize = height/2; }
-	textSize(topSize * 1.5);
+	textSize(topSize);
 	strokeWeight(topSize/20);
 	for(i = 0; i < topLines.length; i++) {
-	    text(topLines[i], width/2, (topSize * 1.5)/4*3 * (i+1));
+	    text(topLines[i].trim(), width/2, (topSize * 1.5)/4*3 * (i+1) + topSize/10);
 	}
     }
     bottomLines = bottomstr.value().match(new RegExp('.{1,' + size + '}', 'g'));
@@ -48,7 +48,7 @@ function draw() {
 	textSize(bottomSize);
 	strokeWeight(bottomSize/20);
 	for(i = bottomLines.length - 1; i >= 0; i--) {
-	    text(bottomLines[bottomLines.length - i - 1], width/2, height - bottomSize/4*3 * (i+1));
+	    text(bottomLines[bottomLines.length - i - 1].trim(), width/2, height - bottomSize/4*3 * (i+1) + bottomSize/10);
 	}
 
     }

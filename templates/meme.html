@@ -13,10 +13,10 @@
 
 <form action="/save_meme" method="POST">
   <input id="memehidden" name="meme" type="hidden">
-  <input type="submit" value="save" onclick="alert(document.getElementById('defaultCanvas0'));document.getElementById('memehidden').value = document.getElementById('defaultCanvas0').toDataURL();">
+  <input type="submit" value="save" onclick="document.getElementById('memehidden').value = document.getElementById('defaultCanvas0').toDataURL('image/jpeg', 0.7);">
 </form>
 {% endif %}
 
-<div class="btn btn-primary rounded" onclick="console.log(document.getElementById('defaultCanvas0').toDataURL());">Click Me</div>
+<!--<div class="btn btn-primary rounded" onclick="console.log(document.getElementById('defaultCanvas0').toDataURL());">Click Me</div>-->
 
 {% endblock content %}
