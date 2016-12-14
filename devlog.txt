@@ -61,3 +61,10 @@ sharonL -- 2016-12-13 05:02
 * fixed the unicode to string error in list
 * working on why there is a list is not callable error on gallery
 * working on save_meme
+
+sharonL -- 2016-12-13 20:01
+* committed the display_all_memes for all memes
+* added get_username() to dbm
+* added sample_meme() to dbm
+* working on display_memes
+* working on buying/selling
