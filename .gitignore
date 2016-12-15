@@ -1,8 +1,10 @@
+# Pretend it's not public info
+*.key
+
 # Emacs!!!
 *~
 *\#
 *tmp
-*key
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
