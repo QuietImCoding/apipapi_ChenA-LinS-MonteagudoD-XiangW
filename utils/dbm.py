@@ -68,7 +68,7 @@ def get_all():
 
 #returns dataurl, price, and memeid of user's memes
 def get_yours(userid):
-    d.execute("SELECT memeid, ref FROM memelist WHERE owner="+str(userid)+";")
+    d.execute("SELECT memeid, ref, price FROM memelist WHERE owner="+str(userid)+";")
     hold = d.fetchall()
 
     list = []
@@ -78,6 +78,7 @@ def get_yours(userid):
         dict['create_ts'] = 'Monday, 12-Dec-16 12:39:25 UTC'
         dict['base64str'] = str(line[1])
         dict['memeid'] = str(line[0])
+        dict['memeprice'] = str(line[2])
         list.append(dict)
 
     return list
@@ -88,7 +89,7 @@ def sample_meme():
     db = sqlite3.connect(f)
     c = db.cursor()
 
-    c.execute("SELECT owner, ref, memeid FROM memelist")
+    c.execute("SELECT owner, ref, memeid, price FROM memelist")
     hold = c.fetchall()
 
     db.commit()
@@ -103,6 +104,7 @@ def sample_meme():
         dict['create_ts'] = 'Monday, 12-Dec-16 12:39:25 UTC'
         dict['base64str'] = str(line[1])
         dict['memeid'] = str(line[2])
+        dict['memeprice'] = str(line[3])
         list.append(dict)
 
     return list
@@ -202,7 +204,9 @@ def exchange_meme(seller, buyer, price, memeid):
     d.execute(q)
     q = 'UPDATE memelist SET owner=%s WHERE memeid=%s;' % (buyer, memeid)
     d.execute(q)
-    
+    q = 'UPDATE memelist SET price = price + 10 WHERE memeid=%s;' % (memeid)
+    d.execute(q)
+
     inc_amtsold(memeid)
 
     db.commit()
