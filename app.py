@@ -17,7 +17,9 @@ def index():
     if (secret in session):
         name = session[secret]
         money = utils.dbm.get_balance(session[secret])
-        return render_template('index.html', moneys = money)
+        memelist = utils.dbm.get_topfive()
+        yourmemes = utils.dbm.get_your_topfive(utils.dbm.get_id(session[secret]))
+        return render_template('index.html', moneys = money, memeList = memelist, yourMemes = yourmemes)
     return render_template('auth.html', action_type='login')
 
 #The login, this here processes ur entered info, ships it on
@@ -74,8 +76,9 @@ def disp_buymeme():
     buyerid = utils.dbm.get_id(session[secret])
     sellerid = utils.dbm.get_owner(request.form['memeid'])
     memeid = request.form['memeid']
-    price = 100
-    utils.dbm.exchange_meme(sellerid, buyerid, price, memeid)
+    price = utils.dbm.get_price(memeid)
+    if (buyerid != sellerid):
+        utils.dbm.exchange_meme(sellerid, buyerid, price, memeid)
 
     return redirect(url_for("index"))
 
@@ -165,7 +168,7 @@ def display_all_memes():
 def return_home():
     if(secret in session):
         #this is to display all of the memes in the gallery
-        return redirect(url_for("index.html"))
+        return redirect(url_for("index"))
     return render_template('auth.html', action_type='login')
 
 

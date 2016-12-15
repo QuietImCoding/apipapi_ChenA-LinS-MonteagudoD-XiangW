@@ -7,7 +7,7 @@
             <blockquote class="blockquote mb-0">
                 <h3 class="mb-0">
 	<a data-toggle="collapse" href="#collapseOne">
-	  Your Memes
+	  Top Memes in the Market
 	</a>
                 </h3></blockquote>
         </div>
@@ -17,91 +17,51 @@
                 <div class="card-deck-wrapper">
                     <div class="card-deck">
                         <!-- SINGLE MEME LAYOUT (CLONED BY JS) -->
+			{%- for meme in memeList %}
                         <div class="card">
-                            <img class="card-img-top img-fluid rounded" src="/static/images/hilarious.jpg">
+                            <img class="card-img-top img-fluid rounded" src={{meme['base64str']}}>
                             <div class="card-block text-xs-center bg-faded">
-                                <h4 class="card-title">$13.37</h4>
+                                <h4 class="card-title">{{meme['memeprice']}}</h4>
                                 <a href="#" class="btn btn-success btn-block">Buy this meme</a>
                             </div>
                         </div>
-                        <div class="card">
-                            <img class="card-img-top img-fluid rounded" src="/static/images/hilarious.jpg">
-                            <div class="card-block text-xs-center bg-faded">
-                                <h4 class="card-title">$13.37</h4>
-                                <a href="#" class="btn btn-success btn-block">Buy this meme</a>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img class="card-img-top img-fluid rounded" src="/static/images/hilarious.jpg">
-                            <div class="card-block text-xs-center bg-faded">
-                                <h4 class="card-title">$13.37</h4>
-                                <a href="#" class="btn btn-success btn-block">Buy this meme</a>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img class="card-img-top img-fluid rounded" src="/static/images/hilarious.jpg">
-                            <div class="card-block text-xs-center bg-faded">
-                                <h4 class="card-title">$13.37</h4>
-                                <a href="#" class="btn btn-success btn-block">Buy this meme</a>
-                            </div>
-                        </div>
-                        
+			{% endfor -%}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 
     <div class="card mb-3">
         <div class="card-header" role="tab">
             <blockquote class="blockquote mb-0">
                 <h3 class="mb-0">
-	<a data-toggle="collapse" href="#collapseTwo">
-	  Top Memes on the Market
+	<a data-toggle="collapse" href="#collapseOne">
+	  Your Top Memes
 	</a>
-                
                 </h3></blockquote>
         </div>
 
-        <div id="collapseTwo" class="collapse in" role="tabpanel">
+        <div id="collapseOne" class="collapse in" role="tabpanel">
             <div class="card-block">
                 <div class="card-deck-wrapper">
                     <div class="card-deck">
                         <!-- SINGLE MEME LAYOUT (CLONED BY JS) -->
+			{%- for meme in yourMemes %}
                         <div class="card">
-                            <img class="card-img-top img-fluid rounded" src="/static/images/hilarious.jpg">
+                            <img class="card-img-top img-fluid rounded" src={{meme['base64str']}}>
                             <div class="card-block text-xs-center bg-faded">
-                                <h4 class="card-title">$13.37</h4>
+                                <h4 class="card-title">{{meme['memeprice']}}</h4>
                                 <a href="#" class="btn btn-success btn-block">Buy this meme</a>
                             </div>
                         </div>
-                        <div class="card">
-                            <img class="card-img-top img-fluid rounded" src="/static/images/hilarious.jpg">
-                            <div class="card-block text-xs-center bg-faded">
-                                <h4 class="card-title">$13.37</h4>
-                                <a href="#" class="btn btn-success btn-block">Buy this meme</a>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img class="card-img-top img-fluid rounded" src="/static/images/hilarious.jpg">
-                            <div class="card-block text-xs-center bg-faded">
-                                <h4 class="card-title">$13.37</h4>
-                                <a href="#" class="btn btn-success btn-block">Buy this meme</a>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img class="card-img-top img-fluid rounded" src="/static/images/hilarious.jpg">
-                            <div class="card-block text-xs-center bg-faded">
-                                <h4 class="card-title">$13.37</h4>
-                                <a href="#" class="btn btn-success btn-block">Buy this meme</a>
-                            </div>
-                        </div>
+			{% endfor -%}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 
 {% endblock content %}

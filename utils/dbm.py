@@ -97,8 +97,6 @@ def sample_meme():
 
     list = []
     for line in hold:
-        print("Entry")
-        print(line)
         dict = {}
         dict['creator'] = str(get_username(line[0]))
         dict['create_ts'] = 'Monday, 12-Dec-16 12:39:25 UTC'
@@ -111,11 +109,32 @@ def sample_meme():
 
 # returns dataurls of the five most expensive memes
 def get_topfive():
-    q = 'SELECT ref FROM memelist ORDER BY price DESC LIMIT 5;'
+    q = 'SELECT ref, price  FROM memelist ORDER BY price DESC LIMIT 5;'
     d.execute(q)
     r = d.fetchall()
 
-    return r[0]
+    list = []
+    for line in r:
+        dict = {}
+        dict['base64str'] = str(line[0])
+        dict['memeprice'] = str(line[1])
+        list.append(dict)
+        
+    return list
+
+def get_your_topfive(userid):
+    q = 'SELECT ref, price  FROM memelist WHERE owner='+str(userid)+' ORDER BY price DESC LIMIT 5;'
+    d.execute(q)
+    r = d.fetchall()
+
+    list = []
+    for line in r:
+        dict = {}
+        dict['base64str'] = str(line[0])
+        dict['memeprice'] = str(line[1])
+        list.append(dict)
+        
+    return list
 
 # takes a numerical userid, returns (int)balance of user
 def get_balance(userid):
