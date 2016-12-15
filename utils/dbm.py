@@ -196,9 +196,9 @@ def set_lastmemesold(userid, nmemeid):
 # buyer buys meme (memeid) from seller, incrmentamtsold 
 def exchange_meme(seller, buyer, price, memeid):
     
-    q = 'UPDATE userdata SET balance=balance + %s WHERE username=\"%s\";' % (price, buyer)
+    q = 'UPDATE userdata SET balance=balance+'+str(price)+' WHERE id='+str(seller)+';'
     d.execute(q)
-    q = 'UPDATE userdata SET balance=balance - %s WHERE username=\"%s\";' % (price, seller)
+    q = 'UPDATE userdata SET balance=balance-'+str(price)+' WHERE id='+str(buyer)+';'
     d.execute(q)
     q = 'UPDATE memelist SET owner=%s WHERE memeid=%s;' % (buyer, memeid)
     d.execute(q)
