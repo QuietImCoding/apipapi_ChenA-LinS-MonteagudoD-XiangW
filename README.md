@@ -11,6 +11,10 @@ To run website from terminal:
 ```
 $ pip install flask
 ```
+- If sqlite3 is not installed
+```
+$ pip install sqlite3
+```
 - To run
 ```
 $ python app.py
