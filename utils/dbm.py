@@ -19,6 +19,7 @@ def get_owner(memeid):
     d.execute(q)
     r = d.fetchall()
 
+    print r
     return r[0][0]
 
 # takes userid, returns username
@@ -149,8 +150,9 @@ def get_ref(memeid):
 # =========== START MUTATOR METHODS ================
 
 # takes price/numerical ownerid/dataurl, saves to memelist
-def add_meme(price, ownerid, url):
-    q = 'INSERT INTO memelist(price, owner, amtsold, ref) VALUES (%s, %s, 1, \"%s\");' % (price, ownerid, url)
+def add_meme(ownerid, url):
+    q = 'INSERT INTO memelist(price, owner, amtsold, ref) VALUES (100, %s, 1, \"%s\");' % (ownerid, url)
+    print q
     d.execute(q)
 
     db.commit()

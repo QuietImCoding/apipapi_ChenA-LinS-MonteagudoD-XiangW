@@ -65,11 +65,11 @@ def make_a_meme():
 
     return render_template('auth.html', action_type='login')
 
-@app.route("/buy_meme", methods=["POST"])
+@app.route("/buy_meme", methods=["GET", "POST"])
 def disp_buymeme():
     if request.method=="GET":
-        redirect('/')
-    buyerid = utils.dbm.get_id(session[secret])
+        return redirect('/')
+    buyerid = utils.dbm.get_id(request.form[secret])
     sellerid = utils.dbm.get_id(utils.dbm.get_owner(request.form['memeid']))
     price = utils.dbm.get_price(request.form['memeid'])
     
@@ -136,7 +136,7 @@ def save_meme():
     if(secret in session):
         #do the saving meme thing here
         #to save the meme and associate it with a user
-        utils.dbm.add_meme(100,utils.dbm.get_id(session[secret]),request.form['meme']) 
+        utils.dbm.add_meme(utils.dbm.get_id(session[secret]),request.form['meme']) 
         return render_template("gallery.html", action="user")
     return render_template('auth.html', action_type='login')
 
