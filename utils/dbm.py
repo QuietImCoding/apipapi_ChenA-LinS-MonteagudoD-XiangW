@@ -68,7 +68,7 @@ def get_all():
 
 #returns dataurl, price, and memeid of user's memes
 def get_yours(userid):
-    d.execute("SELECT owner, ref FROM memelist WHERE owner="+str(userid)+";")
+    d.execute("SELECT memeid, ref FROM memelist WHERE owner="+str(userid)+";")
     hold = d.fetchall()
 
     list = []
@@ -77,6 +77,7 @@ def get_yours(userid):
         dict['creator'] = str(get_username(userid))
         dict['create_ts'] = 'Monday, 12-Dec-16 12:39:25 UTC'
         dict['base64str'] = str(line[1])
+        dict['memeid'] = str(line[0])
         list.append(dict)
 
     return list
@@ -87,7 +88,7 @@ def sample_meme():
     db = sqlite3.connect(f)
     c = db.cursor()
 
-    c.execute("SELECT owner, ref FROM memelist")
+    c.execute("SELECT owner, ref, memeid FROM memelist")
     hold = c.fetchall()
 
     db.commit()
@@ -101,6 +102,7 @@ def sample_meme():
         dict['creator'] = str(get_username(line[0]))
         dict['create_ts'] = 'Monday, 12-Dec-16 12:39:25 UTC'
         dict['base64str'] = str(line[1])
+        dict['memeid'] = str(line[2])
         list.append(dict)
 
     return list
@@ -171,7 +173,7 @@ def set_price(url, nprice):
     db.commit()
 
 # takes memeid, increments amtsold by one
-def incrmt_amtsold(memeid):
+def inc_amtsold(memeid):
     q = 'UPDATE memelist SET amtsold=amtsold + 1 WHERE memeid=\"%s\";' % (memeid)
     d.execute(q)
 
@@ -192,8 +194,7 @@ def set_lastmemesold(userid, nmemeid):
     db.commit()
 
 # buyer buys meme (memeid) from seller, incrmentamtsold 
-def exhange_meme(seller, buyer, memeid):
-    price = get_price(memeid)
+def exchange_meme(seller, buyer, price, memeid):
     
     q = 'UPDATE userdata SET balance=balance + %s WHERE username=\"%s\";' % (price, buyer)
     d.execute(q)
@@ -202,7 +203,8 @@ def exhange_meme(seller, buyer, memeid):
     q = 'UPDATE memelist SET owner=%s WHERE memeid=%s;' % (buyer, memeid)
     d.execute(q)
     
-    incrmnt_amtsold(memeid)
+    inc_amtsold(memeid)
 
     db.commit()
 # =========== END MUTATOR METHODS ================
+

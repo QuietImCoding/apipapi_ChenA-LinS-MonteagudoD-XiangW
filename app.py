@@ -69,11 +69,12 @@ def make_a_meme():
 def disp_buymeme():
     if request.method=="GET":
         return redirect('/')
-    buyerid = utils.dbm.get_id(request.form[secret])
-    sellerid = utils.dbm.get_id(utils.dbm.get_owner(request.form['memeid']))
-    price = utils.dbm.get_price(request.form['memeid'])
-    
-    utils.dbm.exchange_meme(sellerid, buyerid, price)
+#    buyerid = utils.dbm.get_id(request.form[secret])
+    buyerid = utils.dbm.get_id(session[secret])
+    sellerid = utils.dbm.get_owner(request.form['memeid'])
+    memeid = request.form['memeid']
+    price = 100
+    utils.dbm.exchange_meme(sellerid, buyerid, price, memeid)
 
     return redirect(url_for("index"))
 
