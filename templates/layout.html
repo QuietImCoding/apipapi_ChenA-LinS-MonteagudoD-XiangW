@@ -25,18 +25,12 @@
           </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link bg-inverse" href="/">
-            Profile
-          </a>
-            </li>
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Meme Market</a>
                 <div class="dropdown-menu bg-inverse text-danger">
                     <a class="dropdown-item text-muted" href="/make_meme">Create a meme</a>
-                    <a class="dropdown-item text-muted" href="#">Buy a Meme</a>
-                    <a class="dropdown-item text-muted" href="/display_memes">View my Memes</a>
+                    <a class="dropdown-item text-muted" href="/display_my_memes">View my Memes</a>
                     <a class="dropdown-item text-muted" href="/display_all_memes">View All Memes</a>
                 </div>
             </li>
@@ -49,7 +43,7 @@
 
             <span class="navbar-text lead float-xs-right text-muted">
           {% if 'secret_cookie_key' in session %}
-            <i>Logged in as:</i>
+                <i>Current Balance: <b>{{ moneys }} Peppies</b> </i> | <i> Logged in as:</i>
           <b>{{ session['secret_cookie_key'] }}</b>
           {% else %}
             <b>Not currently logged in!</b>

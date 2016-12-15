@@ -16,7 +16,10 @@ secret = 'secret_cookie_key'
 def index():
     if (secret in session):
         name = session[secret]
-        return render_template('index.html')
+        money = utils.dbm.get_balance(session[secret])
+        memelist = utils.dbm.get_topfive()
+        yourmemes = utils.dbm.get_your_topfive(utils.dbm.get_id(session[secret]))
+        return render_template('index.html', moneys = money, memeList = memelist, yourMemes = yourmemes)
     return render_template('auth.html', action_type='login')
 
 #The login, this here processes ur entered info, ships it on
@@ -59,21 +62,23 @@ def make_a_meme():
             urls.append("https://farm%s.staticflickr.com/%s/%s_%s.jpg" % (photo[0], photo[1], photo[2], photo[3]))
         example_random = random.randrange(len(examples))
         example_used = examples[example_random]
-
+        money = utils.dbm.get_balance(session[secret])
         print(urls[0])
-        return render_template('meme.html', action_type='make', image_url=urls[0])
+        return render_template('meme.html', action_type='make', image_url=urls[0], moneys = money )
 
     return render_template('auth.html', action_type='login')
 
-@app.route("/buy_meme", methods=["POST"])
+@app.route("/buy_meme", methods=["GET", "POST"])
 def disp_buymeme():
     if request.method=="GET":
-        redirect('/')
+        return redirect(url_for("index"))
+#    buyerid = utils.dbm.get_id(request.form[secret])
     buyerid = utils.dbm.get_id(session[secret])
-    sellerid = utils.dbm.get_id(utils.dbm.get_owner(request.form['memeid']))
-    price = utils.dbm.get_price(request.form['memeid'])
-    
-    utils.dbm.exchange_meme(sellerid, buyerid, price)
+    sellerid = utils.dbm.get_owner(request.form['memeid'])
+    memeid = request.form['memeid']
+    price = utils.dbm.get_price(memeid)
+    if (buyerid != sellerid):
+        utils.dbm.exchange_meme(sellerid, buyerid, price, memeid)
 
     return redirect(url_for("index"))
 
@@ -129,61 +134,41 @@ def split_lines(s, step):
     chunks = sentence.split()
     return [' '.join(g) for k, g in groupby(chunks, lambda i: c.next() // step)]
 
-
-
 @app.route("/save_meme", methods=["GET", "POST"])
 def save_meme():
     if(secret in session):
         #do the saving meme thing here
         #to save the meme and associate it with a user
-        utils.dbm.add_meme(100,utils.dbm.get_id(session[secret]),request.form['meme']) 
-        return render_template("gallery.html", action="user")
+        utils.dbm.add_meme(utils.dbm.get_id(session[secret]),request.form['meme']) 
+        #return render_template("gallery.html", action="user")
+
+        return redirect(url_for("display_my_memes"))
     return render_template('auth.html', action_type='login')
 
-@app.route("/display_memes")
-def sample_meme():
-    f = "data/dab.db"
-    db = sqlite3.connect(f)
-    c = db.cursor()
-
-    c.execute("SELECT owner, ref FROM memelist")
-    hold = c.fetchall()
-
-    db.commit()
-    db.close()
-
-    mylist = []
-    for line in hold:
-        mydict = {}
-        mydict['creator'] = str(line[0])
-        mydict['create_ts'] = 'Monday, 12-Dec-16 12:39:25 UTC'
-        mydict['base64str'] = line[1]
-        mylist.append(mydict)
-
-    return render_template("gallery.html", sampleMemes = mylist);
-
-def display_memes():
+@app.route("/display_my_memes")
+def display_my_memes():
     if(secret in session):
         #displays only user's memes
-        memelist = utils.dhm.get_yours(session[secret])
-        print(memelist)
-        return render_template("gallery.html", action="user", sampleMemes = memelist, sample_memes = memelist)
+        memelist = utils.dbm.get_yours(utils.dbm.get_id(session[secret]))
+        money = utils.dbm.get_balance(session[secret])
+        return render_template("gallery.html", action="user", sampleMemes = memelist, moneys = money)
     return render_template('auth.html', action_type='login')
 
 @app.route("/display_all_memes")
-
 def display_all_memes():
     if(secret in session):
         #this is to display all of the memes in the gallery
+        print(utils.dbm.get_id(str(session[secret])))
         memelist = utils.dbm.sample_meme()
-        return render_template("gallery.html", action="all", sampleMemes = memelist)
+        money = utils.dbm.get_balance(session[secret])
+        return render_template("gallery.html", action="all", sampleMemes = memelist, moneys = money)
     return render_template('auth.html', action_type='login')
 
 @app.route("/home")
 def return_home():
     if(secret in session):
         #this is to display all of the memes in the gallery
-        return render_template("index.html")
+        return redirect(url_for("index"))
     return render_template('auth.html', action_type='login')
 
 

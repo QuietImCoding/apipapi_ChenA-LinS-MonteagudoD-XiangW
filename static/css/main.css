@@ -1,6 +1,17 @@
+@font-face {
+      font-family: peppie;
+      src: url("/static/fonts/peppiefont.ttf");
+      font-weight: 600;
+}
+
 body {
     background-color: salmon;
     padding-top: 100px; /* for navbar */
+}
+
+.peppie {
+    font-family: peppie;
+    font-size: 1.3em;
 }
 
 /* make dropdown options show up on hover vs on click */
@@ -12,6 +23,11 @@ body {
 .form-control {
     line-height: 1.25;
     font-size: 0.9rem;
+}
+
+.form-wide {
+    line-height: 1.5;
+    font-size: 1.2rem;
 }
 
 .card .card-block {
@@ -26,14 +42,11 @@ body {
     white-space: normal;
 }
 
-.card-img-overlay .card-title, 
-.card-img-overlay .card-text,
-.card-img-overlay .card-text small
-{
-    
-}
 
 
+/***********************************************
+HOVER STUFF 
+***********************************************/
 .hovereffect {
 width:auto;
 height:100%;
@@ -90,7 +103,7 @@ opacity:0;
 filter:alpha(opacity=0);
 -webkit-transition:all .2s ease-in-out;
 transition:all .2s ease-in-out;
-margin:50px 0 0;
+margin:10% 0 0;
 padding:7px 14px;
 }
 

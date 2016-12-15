@@ -68,3 +68,21 @@ sharonL -- 2016-12-13 20:01
 * added sample_meme() to dbm
 * working on display_memes
 * working on buying/selling
+
+williamX --- 2016-12-15 01:35
+* fixed minor bugs allowing you to buy own meme
+* implemented peppie font
+* removed unnecessary tabs in navbar
+* made everything look a tad nicer
+* deteriorated health by a lot :(
+
+sharonL -- 2016-12-14 21:01
+* finished the index
+* finished buying/selling memes
+* updated save memes
+* added additional methods to dbm
+* fixed the memeid issues in display memes
+* displays balance
+
+sharonL -- 2016-12-15 06:49
+* added the about page

@@ -1,3 +1,6 @@
+# Pretend it's not public info
+*.key
+
 # Emacs!!!
 *~
 *\#
