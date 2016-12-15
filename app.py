@@ -65,11 +65,11 @@ def make_a_meme():
 
     return render_template('auth.html', action_type='login')
 
-@app.route("/buy_meme", methods=["POST"])
+@app.route("/buy_meme", methods=["GET", "POST"])
 def disp_buymeme():
     if request.method=="GET":
-        redirect('/')
-    buyerid = utils.dbm.get_id(session['secret'])
+        return redirect('/')
+    buyerid = utils.dbm.get_id(request.form[secret])
     sellerid = utils.dbm.get_id(utils.dbm.get_owner(request.form['memeid']))
     price = utils.dbm.get_price(request.form['memeid'])
     

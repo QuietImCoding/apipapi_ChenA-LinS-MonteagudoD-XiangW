@@ -25,6 +25,8 @@
 
 ] %} <!-- {'memeid':<int>, creator':'...', 'create_ts':'...', 'base64str':'...', 'price':'...'} -->
 
+{% set kek = session['secret_cookie_key'] %}
+
 {% endif %}
 
 <div class="container">
@@ -35,7 +37,7 @@
                 <img class="img-fluid rounded" src={{meme[ 'base64str']}}>
                 <div class="overlay">
                     <h2><i>Meme ID</i> <b>{{meme['memeid']}}</b> <i>by </i> <b>{{meme['creator']}}</b></h2>
-                    <a class="info" href={{meme[ 'base64str']}} data-toggle="lightbox" data-gallery="meme_gallery" data-title="<p class='lead mb-0 pb-0'><i>Created by:</i> <b>{{meme['creator']}}</b></p>" data-footer="<form action='/buy_meme' method='POST'><input type='hidden' name='memeid' value={{meme['memeid']}}><input class='btn bg-inverse btn-outline-secondary btn-block text-uppercase text-muted font-weight-bold' type='submit' name='submit' value='Buy this Meme!'><p class='text-danger mt-1 pb-0'>-{{meme['price']}}</p></a></form>">Check it Out!</a>
+                    <a class="info" href={{meme[ 'base64str']}} data-toggle="lightbox" data-gallery="meme_gallery" data-title="<p class='lead mb-0 pb-0'><i>Created by:</i> <b>{{meme['creator']}}</b></p>" data-footer="<form action='/buy_meme' method='POST'><input type='hidden' name='memeid' value={{meme['memeid']}}><input type='hidden' name='secret_cookie_key' value={{session.secret_cookie_key}}><input class='btn bg-inverse btn-outline-secondary btn-block text-uppercase text-muted font-weight-bold' type='submit' name='submit' value='Buy this Meme!'><p class='text-danger mt-1 pb-0'>-{{meme['price']}}</p></a></form>">Check it Out!</a>
                     <p class="text-danger mt-1">{{meme['create_ts']}}</p>
                 </div>
             </div>
