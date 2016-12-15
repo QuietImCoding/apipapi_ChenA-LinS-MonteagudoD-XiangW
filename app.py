@@ -45,7 +45,7 @@ def log_em_in():
 #Logs out, pops session    
 @app.route("/logout")
 def log_em_out():
-    print session
+    session
     session.pop(secret)
     return redirect(url_for("index")) #redirect(url_for("log_em_in"))
 
@@ -63,7 +63,7 @@ def make_a_meme():
         example_random = random.randrange(len(examples))
         example_used = examples[example_random]
         money = utils.dbm.get_balance(session[secret])
-        print(urls[0])
+        #print(urls[0])
         return render_template('meme.html', action_type='make', image_url=urls[0], moneys = money )
 
     return render_template('auth.html', action_type='login')
@@ -158,7 +158,7 @@ def display_my_memes():
 def display_all_memes():
     if(secret in session):
         #this is to display all of the memes in the gallery
-        print(utils.dbm.get_id(str(session[secret])))
+        #print(utils.dbm.get_id(str(session[secret])))
         memelist = utils.dbm.sample_meme()
         money = utils.dbm.get_balance(session[secret])
         return render_template("gallery.html", action="all", sampleMemes = memelist, moneys = money)
@@ -206,4 +206,4 @@ def create_dat_account():
 
 if __name__ == "__main__":
     app.debug = True
-    app.run() 
+    app.run(threaded = True) 
