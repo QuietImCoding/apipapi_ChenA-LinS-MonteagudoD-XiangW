@@ -15,7 +15,7 @@ $ pip install flask
 ```
 $ pip install sqlite3
 ```
-- To run
+- To run from main directory
 ```
 $ python app.py
 ```
