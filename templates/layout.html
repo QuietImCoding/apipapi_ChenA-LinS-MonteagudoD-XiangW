@@ -49,7 +49,7 @@
 
             <span class="navbar-text lead float-xs-right text-muted">
           {% if 'secret_cookie_key' in session %}
-            <i>Logged in as:</i>
+            <i>Current Balance:{{moneys }} | Logged in as:</i>
           <b>{{ session['secret_cookie_key'] }}</b>
           {% else %}
             <b>Not currently logged in!</b>

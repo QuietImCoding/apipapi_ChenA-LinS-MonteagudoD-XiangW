@@ -16,7 +16,8 @@ secret = 'secret_cookie_key'
 def index():
     if (secret in session):
         name = session[secret]
-        return render_template('index.html')
+        money = utils.dbm.get_balance(session[secret])
+        return render_template('index.html', moneys = money)
     return render_template('auth.html', action_type='login')
 
 #The login, this here processes ur entered info, ships it on
@@ -59,9 +60,9 @@ def make_a_meme():
             urls.append("https://farm%s.staticflickr.com/%s/%s_%s.jpg" % (photo[0], photo[1], photo[2], photo[3]))
         example_random = random.randrange(len(examples))
         example_used = examples[example_random]
-
+        money = utils.dbm.get_balance(session[secret])
         print(urls[0])
-        return render_template('meme.html', action_type='make', image_url=urls[0])
+        return render_template('meme.html', action_type='make', image_url=urls[0], moneys = money )
 
     return render_template('auth.html', action_type='login')
 
@@ -146,9 +147,8 @@ def display_my_memes():
     if(secret in session):
         #displays only user's memes
         memelist = utils.dbm.get_yours(utils.dbm.get_id(session[secret]))
-        print (session[secret])
-        print("he")
-        return render_template("gallery.html", action="user", sampleMemes = memelist)
+        money = utils.dbm.get_balance(session[secret])
+        return render_template("gallery.html", action="user", sampleMemes = memelist, moneys = money)
     return render_template('auth.html', action_type='login')
 
 @app.route("/display_all_memes")
@@ -157,14 +157,15 @@ def display_all_memes():
         #this is to display all of the memes in the gallery
         print(utils.dbm.get_id(str(session[secret])))
         memelist = utils.dbm.sample_meme()
-        return render_template("gallery.html", action="all", sampleMemes = memelist)
+        money = utils.dbm.get_balance(session[secret])
+        return render_template("gallery.html", action="all", sampleMemes = memelist, moneys = money)
     return render_template('auth.html', action_type='login')
 
 @app.route("/home")
 def return_home():
     if(secret in session):
         #this is to display all of the memes in the gallery
-        return render_template("index.html")
+        return redirect(url_for("index.html"))
     return render_template('auth.html', action_type='login')
 
 
