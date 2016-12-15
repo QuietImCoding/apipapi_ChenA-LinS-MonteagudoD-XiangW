@@ -129,38 +129,16 @@ def split_lines(s, step):
     chunks = sentence.split()
     return [' '.join(g) for k, g in groupby(chunks, lambda i: c.next() // step)]
 
-
-
 @app.route("/save_meme", methods=["GET", "POST"])
 def save_meme():
     if(secret in session):
         #do the saving meme thing here
         #to save the meme and associate it with a user
         utils.dbm.add_meme(utils.dbm.get_id(session[secret]),request.form['meme']) 
-        return render_template("gallery.html", action="user")
+        #return render_template("gallery.html", action="user")
+
+        return redirect(url_for("display_my_memes"))
     return render_template('auth.html', action_type='login')
-
-@app.route("/display_memes")
-def sample_meme():
-    f = "data/dab.db"
-    db = sqlite3.connect(f)
-    c = db.cursor()
-
-    c.execute("SELECT owner, ref FROM memelist")
-    hold = c.fetchall()
-
-    db.commit()
-    db.close()
-
-    mylist = []
-    for line in hold:
-        mydict = {}
-        mydict['creator'] = str(line[0])
-        mydict['create_ts'] = 'Monday, 12-Dec-16 12:39:25 UTC'
-        mydict['base64str'] = line[1]
-        mylist.append(mydict)
-
-    return render_template("gallery.html", sampleMemes = mylist);
 
 @app.route("/display_my_memes")
 def display_my_memes():
