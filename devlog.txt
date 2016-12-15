@@ -75,3 +75,11 @@ williamX --- 2016-12-15 01:35
 * removed unnecessary tabs in navbar
 * made everything look a tad nicer
 * deteriorated health by a lot :(
+
+sharonL -- 2016-12-14 21:01
+* finished the index
+* finished buying/selling memes
+* updated save memes
+* added additional methods to dbm
+* fixed the memeid issues in display memes
+* displays balance
