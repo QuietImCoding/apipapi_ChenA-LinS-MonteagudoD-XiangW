@@ -26,4 +26,3 @@ $ pip install sqlite3
 $ python app.py
 ```
 - Open a browser to localhost:5000
->>>>>>> 1d9e3ab802065f465d6429430d411853bf4db5ea
