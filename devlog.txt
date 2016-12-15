@@ -83,3 +83,6 @@ sharonL -- 2016-12-14 21:01
 * added additional methods to dbm
 * fixed the memeid issues in display memes
 * displays balance
+
+sharonL -- 2016-12-15 06:49
+* added the about page
