@@ -7,7 +7,7 @@
             <blockquote class="blockquote mb-0">
                 <h3 class="mb-0">
 	<a data-toggle="collapse" href="#collapseOne">
-	  Top Memes in the Market
+	  Top Memes on the Market
 	</a>
                 </h3></blockquote>
         </div>
@@ -17,20 +17,22 @@
                 <div class="card-deck-wrapper">
                     <div class="card-deck">
                         <!-- SINGLE MEME LAYOUT (CLONED BY JS) -->
-			{%- for meme in memeList %}
+                        {%- for meme in memeList %}
                         <div class="card">
-                            <img class="card-img-top img-fluid rounded" src={{meme['base64str']}}>
+                            <img class="card-img-top img-fluid rounded" src={{meme[ 'base64str']}}>
                             <div class="card-block text-xs-center bg-faded">
-                                <h4 class="card-title">Price: {{meme['memeprice']}}</h4>
-                                <h4 class="card-title">Creator: {{meme['creator']}}</h4>
-				<form action="/buy_meme" method="POST">
-				  <input type="hidden" name="memeid" value={{meme['memeid']}}>
-				  <input type="submit" class="btn btn-success btn-block" name="Buy this meme!">
-				</form>
+                                <h5 class="card-title"><i>Creator: </i> <b>{{meme['creator']}}</b></h5>
+                                <h5 class="card-title"><i>Price: </i> <b>{{meme['memeprice']}}</b> <span class="peppie">$</span></h5>
+                                {% if meme['creator'] != session['secret_cookie_key'] %}
+                                <form action="/buy_meme" method="POST">
+                                    <input type="hidden" name="memeid" value={{meme[ 'memeid']}}>
+                                    <input type="submit" class="btn btn-success btn-block" name="submit" value="Buy this meme!">
+                                </form>
+                                {% endif %}
 
                             </div>
                         </div>
-			{% endfor -%}
+                        {% endfor -%}
                     </div>
                 </div>
             </div>
@@ -51,15 +53,14 @@
             <div class="card-block">
                 <div class="card-deck-wrapper">
                     <div class="card-deck">
-                        <!-- SINGLE MEME LAYOUT (CLONED BY JS) -->
-			{%- for meme in yourMemes %}
+                        {%- for meme in yourMemes %}
                         <div class="card">
-                            <img class="card-img-top img-fluid rounded" src={{meme['base64str']}}>
+                            <img class="card-img-top img-fluid rounded" src={{meme[ 'base64str']}}>
                             <div class="card-block text-xs-center bg-faded">
-                                <h4 class="card-title">{{meme['memeprice']}}</h4>
+                                <h5 class="card-title">Price:  {{meme['memeprice']}} <span class="peppie">$</span></h5>
                             </div>
                         </div>
-			{% endfor -%}
+                        {% endfor -%}
                     </div>
                 </div>
             </div>

@@ -2,21 +2,37 @@
 <script language="javascript" type="text/javascript" src="/static/js/p5.min.js"></script>
 <script language="javascript" type="text/javascript" src="/static/js/p5.dom.min.js"></script>
 <script language="javascript" type="text/javascript" src="/static/js/sketch.js"></script>
-<title> Meme Maker </title> 
-{% endblock head %} {% block content %}
+<title> Meme Maker </title>
+{% endblock head %} {% block content %} {% if action_type == "make" %}
+<div class="container text-md-center">
+    <div class="container bg-danger pt-3 pb-3">
+        <h1 class="pt-1 pb-1 pl-1 pr-1 mb-3 display-2 rounded" style="display: inline-block; background-color:gold;">Caption this Meme!</h1>
+        <div id="meme-holder"></div>
+        <br>
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <form action="/save_meme" method="POST">
+                    <div class="form-group">
+                        <label><h3>Top Text</h3></label>
+                        <input class="form-wide form-control" type="text" id="top" name="top" name="username" value="Sample Text">
+                    </div>
+                    <div class="form-group">
+                        <label><h3>Bottom Text</h3></label>
+                        <input class="form-wide form-control" type="text" id="bottom" name="bottom" value="Sample Text">
+                    </div>
+                    <input id="url" name="imgurl" type="hidden" value="{{image_url}}">
+                    <input id="memehidden" name="meme" type="hidden">
+                    <hr>
+                    <input type="submit" class="btn btn-primary" value="Save Meme" onclick="document.getElementById('memehidden').value = document.getElementById('defaultCanvas0').toDataURL('image/jpeg', 0.7);">
 
-{% if action_type == "make" %}
-<div id="meme-holder"></div>
-<input type="text" id="top" name="top">
-<input type="text" id="bottom" name="bottom">
-<input id="url" name="imgurl" type="hidden" value="{{image_url}}">
-
-<form action="/save_meme" method="POST">
-  <input id="memehidden" name="meme" type="hidden">
-  <input type="submit" value="save" onclick="document.getElementById('memehidden').value = document.getElementById('defaultCanvas0').toDataURL('image/jpeg', 0.7);">
-</form>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endif %}
 
+<br><br><br>
 <!--<div class="btn btn-primary rounded" onclick="console.log(document.getElementById('defaultCanvas0').toDataURL());">Click Me</div>-->
 
 {% endblock content %}
