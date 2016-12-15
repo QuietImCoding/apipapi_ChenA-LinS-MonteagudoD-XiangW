@@ -165,9 +165,10 @@ def sample_meme():
 def display_memes():
     if(secret in session):
         #displays only user's memes
-        memelist = utils.dhm.get_yours(session[secret])
-        print(memelist)
-        return render_template("gallery.html", action="user", sampleMemes = memelist, sample_memes = memelist)
+        memelist = utils.dbm.get_yours(utils.dbm.get_id(session[secret]))
+        print (session[secret])
+        print("he")
+        return render_template("gallery.html", action="user", sampleMemes = memelist)
     return render_template('auth.html', action_type='login')
 
 @app.route("/display_all_memes")

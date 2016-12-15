@@ -1,55 +1,48 @@
-import sqlite3
+import sqlite3, dbm
 
-def sample_meme():
-    f = "../data/dab.db"
-    db = sqlite3.connect(f)
-    c = db.cursor()
+db1 = sqlite3.connect("../data/dab.db")
+d1 = db1.cursor()
 
-    c.execute("SELECT owner, ref FROM memelist")
-    hold = c.fetchall()
+def get_username(userid):
+    d2 = db1.cursor()
+    q = 'SELECT username FROM userdata WHERE id='+str(userid)+';'
+    d2.execute(q)
+    r = d2.fetchall()
+    return r[0][0]
 
-    db.commit()
-    db.close()
-
+def your_meme(userid):
+    d1.execute("SELECT owner, ref FROM memelist WHERE owner="+str(userid)+";")
+    hold = d1.fetchall()
     list = []
     for line in hold:
-        print("Entry")
-        print(line)
         dict = {}
-        dict['creator'] = str(line[1])
+        dict['creator'] = str(get_username(line[1]))
         dict['create_ts'] = 'Monday, 12-Dec-16 12:39:25 UTC'
         dict['base64str'] = str(line[0])
         list.append(dict)
 
     return list
 
-def get_username(userid):
-    db1 = sqlite3.connect("../data/dab.db", check_same_thread=False)
-    d1 = db1.cursor()
-    q = 'SELECT username FROM userdata WHERE id='+str(userid)+';'
-    d1.execute(q)
-    r = d1.fetchall()
-    db1.commit()
-    db1.close()
-    return r[0][0]
-
-print(get_username(3))
-
-def get_yours(user):
-    db1 = sqlite3.connect("../data/dab.db", check_same_thread=False)
-    d1 = db1.cursor()
-    #q = 'SELECT memeid, price, ref FROM memelist WHERE username='+user+';'
-    q = 'SELECT memeid, price, ref FROM memelist;'
-    d1.execute(q)
-    r = d1.fetchall()
-    db1.commit()
-    db1.close()
-    ret = dict()
-    for t in r:
-        ret[t[2]] = [t[0], t[1]] #ref: [memeid, price]
-
-    return ret
+#print(your_meme(3))
 
 
-#print(get_yours("ss"))
-#print(sample_meme())
+def sample_meme():
+    c = db1.cursor()
+
+    c.execute("SELECT owner, ref FROM memelist WHERE owner=3")
+    hold = c.fetchall()
+
+    list = []
+    for line in hold:
+        dict = {}
+        dict['creator'] = str(get_username(line[0]))
+        dict['create_ts'] = 'Monday, 12-Dec-16 12:39:25 UTC'
+        dict['base64str'] = str(line[1])
+        list.append(dict)
+
+    return list
+
+print(sample_meme())
+
+db1.commit()
+db1.close()
