@@ -26,7 +26,7 @@ def your_meme(userid):
 #print(your_meme(3))
 
 
-def sample_meme():
+def sample_memåe():
     c = db1.cursor()
 
     c.execute("SELECT owner, ref FROM memelist WHERE owner=3")

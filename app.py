@@ -162,7 +162,8 @@ def sample_meme():
 
     return render_template("gallery.html", sampleMemes = mylist);
 
-def display_memes():
+@app.route("/display_my_memes")
+def display_my_memes():
     if(secret in session):
         #displays only user's memes
         memelist = utils.dbm.get_yours(utils.dbm.get_id(session[secret]))
@@ -172,10 +173,10 @@ def display_memes():
     return render_template('auth.html', action_type='login')
 
 @app.route("/display_all_memes")
-
 def display_all_memes():
     if(secret in session):
         #this is to display all of the memes in the gallery
+        print(utils.dbm.get_id(str(session[secret])))
         memelist = utils.dbm.sample_meme()
         return render_template("gallery.html", action="all", sampleMemes = memelist)
     return render_template('auth.html', action_type='login')

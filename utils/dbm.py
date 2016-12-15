@@ -68,13 +68,13 @@ def get_all():
 
 #returns dataurl, price, and memeid of user's memes
 def get_yours(userid):
-    q.execute("SELECT owner, ref FROM memelist WHERE owner="+str(userid)+";")
-    hold = q.fetchall()
+    d.execute("SELECT owner, ref FROM memelist WHERE owner="+str(userid)+";")
+    hold = d.fetchall()
 
     list = []
     for line in hold:
         dict = {}
-        dict['creator'] = str(get_username(line[0]))
+        dict['creator'] = str(get_username(userid))
         dict['create_ts'] = 'Monday, 12-Dec-16 12:39:25 UTC'
         dict['base64str'] = str(line[1])
         list.append(dict)
