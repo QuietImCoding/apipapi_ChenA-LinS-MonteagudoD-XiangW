@@ -21,8 +21,13 @@
                         <div class="card">
                             <img class="card-img-top img-fluid rounded" src={{meme['base64str']}}>
                             <div class="card-block text-xs-center bg-faded">
-                                <h4 class="card-title">{{meme['memeprice']}}</h4>
-                                <a href="#" class="btn btn-success btn-block">Buy this meme</a>
+                                <h4 class="card-title">Price: {{meme['memeprice']}}</h4>
+                                <h4 class="card-title">Creator: {{meme['creator']}}</h4>
+				<form action="/buy_meme" method="POST">
+				  <input type="hidden" name="memeid" value={{meme['memeid']}}>
+				  <input type="submit" class="btn btn-success btn-block" name="Buy this meme!">
+				</form>
+
                             </div>
                         </div>
 			{% endfor -%}
@@ -52,7 +57,6 @@
                             <img class="card-img-top img-fluid rounded" src={{meme['base64str']}}>
                             <div class="card-block text-xs-center bg-faded">
                                 <h4 class="card-title">{{meme['memeprice']}}</h4>
-                                <a href="#" class="btn btn-success btn-block">Buy this meme</a>
                             </div>
                         </div>
 			{% endfor -%}

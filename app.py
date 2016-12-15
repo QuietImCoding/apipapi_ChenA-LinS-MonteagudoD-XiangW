@@ -71,7 +71,7 @@ def make_a_meme():
 @app.route("/buy_meme", methods=["GET", "POST"])
 def disp_buymeme():
     if request.method=="GET":
-        return redirect('/')
+        return redirect(url_for("index"))
 #    buyerid = utils.dbm.get_id(request.form[secret])
     buyerid = utils.dbm.get_id(session[secret])
     sellerid = utils.dbm.get_owner(request.form['memeid'])

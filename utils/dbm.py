@@ -109,7 +109,7 @@ def sample_meme():
 
 # returns dataurls of the five most expensive memes
 def get_topfive():
-    q = 'SELECT ref, price  FROM memelist ORDER BY price DESC LIMIT 5;'
+    q = 'SELECT ref, price, owner, memeid  FROM memelist ORDER BY price DESC LIMIT 5;'
     d.execute(q)
     r = d.fetchall()
 
@@ -118,12 +118,14 @@ def get_topfive():
         dict = {}
         dict['base64str'] = str(line[0])
         dict['memeprice'] = str(line[1])
+        dict['creator'] = str(get_username(line[2]))
+        dict['memeid'] = str(line[3])
         list.append(dict)
         
     return list
 
 def get_your_topfive(userid):
-    q = 'SELECT ref, price  FROM memelist WHERE owner='+str(userid)+' ORDER BY price DESC LIMIT 5;'
+    q = 'SELECT ref, price, memeid FROM memelist WHERE owner='+str(userid)+' ORDER BY price DESC LIMIT 5;'
     d.execute(q)
     r = d.fetchall()
 
@@ -132,6 +134,7 @@ def get_your_topfive(userid):
         dict = {}
         dict['base64str'] = str(line[0])
         dict['memeprice'] = str(line[1])
+        dict['memeid'] = str(line[2])
         list.append(dict)
         
     return list
